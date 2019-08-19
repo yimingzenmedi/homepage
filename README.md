@@ -1,7 +1,7 @@
 # homepage
-homemade homepage : )
+Homemade homepage : )
 
-Navigation website implemented by vue. This contains ~~version 1.0~~ (home.html) and version 1.1 (index.html). All the background pictures are from [wallpapercave](https://wallpapercave.com/). Version 1.1 is recommanded. The following introduction is also based on v1.1.
+Navigation website mainly implemented by Vue.js. This contains ~~version 1.0~~ (home.html) and version 1.1 (index.html). All the background pictures are from [wallpapercave](https://wallpapercave.com/). Version 1.1 is recommanded. The following introduction is also based on v1.1.
 
 ----------------------------------------
 
