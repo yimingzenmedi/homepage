@@ -33,6 +33,7 @@ For the next step I want to write a backend and a login program to allow users t
 
 More features are being imagined...
 
+-------------------------------------------
 
 ***Enjoy your journey with it!***
 
