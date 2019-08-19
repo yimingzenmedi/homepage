@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Access-Control-Allow-Origin" content="*"> -->
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/color-thief.js"></script>
+
+    <!--<script src="http://rawgit.com/briangonzalez/rgbaster.js/master/rgbaster.min.js"></script>-->
+    <!--<script type="text/javascript" src="../js/main.js"></script>-->
+    <title>HOME</title>
+
+    <style type="text/css">
+        html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        *{
+            box-sizing: border-box;
+        }
+
+        /*body {*/
+
+        /*}*/
+
+        /*breath*/
+        .breathing {
+            /*copied:*/
+            -webkit-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+            -moz-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+            -ms-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+            -o-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+            box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+
+            -webkit-animation-name: breath;
+            -webkit-animation-duration: 12s;     /*人的普通呼吸时间是3秒每次，深呼吸时间是6秒每次*/
+            -webkit-animation-timing-function: ease-in-out;
+            -webkit-animation-iteration-count: infinite;
+        }
+
+        /*@-webkit-keyframes 'breath' {*/
+            /*from {*/
+                /*-webkit-box-shadow:0 0 40px rgba(200, 255, 200, 0.75);*/
+                /*-moz-box-shadow:0 0 40px rgba(200, 255, 200, 0.75);*/
+                /*-ms-box-shadow:0 0 40px rgba(200, 255, 200, 0.75);*/
+                /*-o-box-shadow:0 0 40px rgba(200, 255, 200, 0.75);*/
+                /*box-shadow:0 0 40px rgba(200, 255, 200, 0.75);*/
+            /*}*/
+            /*25% {*/
+                /*-webkit-box-shadow:0 0 10px rgba(200, 255, 130, 0.5);*/
+                /*-moz-box-shadow:0 0 10px rgba(200, 255, 130, 0.5);*/
+                /*-ms-box-shadow:0 0 10px rgba(200, 255, 130, 0.5);*/
+                /*-o-box-shadow:0 0 10px rgba(200, 255, 130, 0.5);*/
+                /*box-shadow:0 0 10px rgba(200, 255, 130, 0.5);*/
+            /*}*/
+            /*50% {*/
+                /*-webkit-box-shadow:0 0 40px rgba(250, 250, 143, 0.8);*/
+                /*-moz-box-shadow:0 0 40px rgba(250, 250, 150,0.8);*/
+                /*-ms-box-shadow:0 0 40px rgba(250, 250, 150,0.8);*/
+                /*-o-box-shadow:0 0 40px rgba(250, 250, 150,0.8);*/
+                /*box-shadow:0 0 40px rgba(250, 250, 150,0.8);*/
+            /*}*/
+            /*75% {*/
+                /*-webkit-box-shadow:0 0 10px rgba(250, 250, 150, 0.5);*/
+                /*-moz-box-shadow:0 0 10px rgba(250, 250, 150, 0.5);*/
+                /*-ms-box-shadow:0 0 10px rgba(250, 250, 150, 0.5);*/
+                /*-o-box-shadow:0 0 10px rgba(250, 250, 150, 0.5);*/
+                /*box-shadow:0 0 10px rgba(250, 250, 150, 0.5);*/
+            /*}*/
+
+            /*to {*/
+                /*-webkit-box-shadow:0 0 40px rgba(200, 255, 130, 0.75);*/
+                /*-moz-box-shadow:0 0 40px rgba(200, 255, 130, 0.75);*/
+                /*-ms-box-shadow:0 0 40px rgba(200, 255, 130, 0.75);*/
+                /*-o-box-shadow:0 0 40px rgba(200, 255, 130, 0.75);*/
+                /*box-shadow:0 0 40px rgba(200, 255, 130, 0.75);*/
+            /*}*/
+        /*}*/
+
+        body {
+            background-color: black;
+            /*background: url(bg/" + url + ") fixed no-repeat");*/
+            background-size: cover;
+            -moz-background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /*换背景图*/
+        #refreshImg {
+            position: fixed;
+            top: 5px;
+            left: 5px;
+            height: 18px;
+            width: 18px;
+        }
+
+        #refresher{
+            position: relative;
+            height: 16px;
+            width: 16px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        #refresher:hover {
+            opacity: 0.4;
+            transition: opacity 1s;
+            cursor: help;
+        }
+
+        /*换呼吸灯颜色*/
+        #colorTest {
+            position: fixed;
+            left: 5px;
+            top: 28px;
+            /*margin-left: 4px;*/
+            margin-top: 5px;
+            opacity: 0;
+            transition: opacity 1s;
+            width: 20px;
+        }
+
+        #colorTest:hover {
+            opacity: 1;
+            transition: opacity 1s;
+            cursor: help;
+        }
+
+        .colorTester {
+            width: 16px;
+            height: 8px;
+
+        }
+
+        /*固定快速入口:*/
+        #fix {
+            position: fixed;
+            left: 5px;
+            top: 56px;
+            /*margin-left: 4px;*/
+            margin-top: 5px;
+            width: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #fix:hover {
+            transition: opacity 0.3s;
+            opacity: 0.7;
+            cursor: help;
+        }
+
+
+        /*****************************************/
+        #main {
+            width: 80%;
+            min-width: 550px;
+            min-height: 100%;
+            position: absolute;
+            top: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            background-color: rgba(255,255,230,0.5);
+            margin-left: 10%;
+            /*box-shadow: 0 0 30px rgba(250,250,230,0.75);*/
+        }
+
+        /*#main:hover {*/
+            /*box-shadow: 0 0 50px rgba(250,250,230,0.75);*/
+        /*}*/
+        /*搜索:****************************************/
+        /*外框*/
+        #search {
+            border: 1px solid rgba(253, 255, 254, 0);
+            width: 400px;
+            height: 45px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.75);
+            transition: box-shadow 0.3s;
+            box-shadow: 0 0 10px rgba(215, 217, 210, 0.65);
+        }
+
+        #search:hover{
+            transition: box-shadow 0.3s;
+            box-shadow: 0 0 20px rgba(225, 227, 220, 0.8);
+        }
+
+        /*表格*/
+        #searcher{
+            text-align: center;
+            margin-top: 2px;
+            border-collapse: collapse;
+            height: 40px;
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        #searcher tr {
+            height: 40px;
+            text-align: center;
+        }
+
+        #searcher td {
+            height: 40px;
+            vertical-align: middle;
+            text-align: center;
+            background: none;
+            /*border: 1px solid;*/
+        }
+
+        /*左侧图片*/
+        #searcher select {
+            height: 40px;
+            width: 110px;
+            margin: 0;
+            outline: 0;
+            border: none;
+            text-align: center;
+            vertical-align: middle;
+            background-image: url("pic/google.png");
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: rgba(255,255,255,0.0);
+            background-color: rgba(255,255,255,0);
+            cursor: pointer;
+        }
+
+        #searcher option {
+            max-height: 35px;
+            max-width: 100px;
+            color: black;
+            text-align: center;
+            border: none;
+        }
+
+        /*搜索栏*/
+        #searcher input {
+            height: 40px;
+            width: 250px;
+            outline: 0;
+            background: none;
+            border: 0;
+        }
+
+        /*按钮*/
+        #searchButton {
+            width: 40px;
+            height: 40px;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(50,50,50,0.5);
+        }
+
+        #searchButton img {
+            width: 30px;
+            margin: 0;
+            padding: 0;
+            margin-top: 5px;
+            cursor: pointer;
+            transition: opacity 0.1s;
+            opacity: 0.2;
+        }
+
+        #searchButton img:hover {
+            transition: opacity 0.1s;
+            opacity: 0.4;
+        }
+
+        /*下:****************************************/
+        #underpart {
+            /*border: 1px solid;*/
+            width: 84%;
+            min-width: 500px;
+            /*min-height: 50%;*/
+            /*max-height: 380px;*/
+            margin-top: 70px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5%;
+            overflow: hidden;
+            text-align: center;
+            align-items: center;
+            transition: 0.5s opacity;
+            opacity: 0;
+
+            display:flex;
+            display: -webkit-flex;
+            /*flex-direction:row-reverse;*/
+            /*flex-wrap: wrap;*/
+            justify-content: space-around;
+            flex-wrap: wrap;
+            /*justify-content: flex-start;*/
+        }
+
+        #underpart:hover {
+            transition: 0.5s opacity;
+            opacity: 1;
+        }
+
+        /*每个block*/
+        .blocks{
+            border-radius: 10px;
+            width: 170px;
+            height: 130px;
+            background: rgb(250,250,250);
+            float: left;
+            margin-right: 1.775%;
+            margin-left: 1.775%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            transition: 0.3s opacity;
+            opacity: 0.6;
+            white-space: nowrap;
+            text-align: center;
+            overflow: hidden;
+            flex-grow: 0.1;
+        }
+
+        .blocks:hover {
+            transition: opacity 0.3s;
+            transition: box-shadow 0.3s;
+            opacity: 0.95;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(200,200,200,0.5);
+        }
+
+        .blocks span {
+            display: inline-block;
+            /*font-weight: bold;*/
+            color: rgba(80,80,80,0.7);
+            padding-top: 3px;
+        }
+
+        /*各入口地址：*/
+        #facebook {
+            background: url(icos/facebook.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #stream {
+            background: url(icos/stream.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #gmail {
+            background: url(icos/gmail.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #qqmail {
+            background: url(icos/qqmail.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #github {
+             background: url(icos/gitHub.jpg);
+             background-size: cover;
+             background-position: center;
+         }
+
+        #qixiange {
+            background: url(icos/qixiange.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #youtube {
+            background: url(icos/youtube.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #baiduyun {
+            background: url(icos/baiduyun.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        /*天气*/
+        #weather {
+            /*border: 1px solid;*/
+            height: 160px;
+            width: 60%;
+            min-width: 270px;
+            position: relative;
+            left: 30px;
+            top: 20px;
+            font-family: Sans-serif, Lucida Family, Helvetica, Tahoma, Arial;
+            font-size: 1.8em;
+            font-weight: lighter;
+            /*color: rgba(230,235,255,0.9);*/
+            color: rgba(60,60,30,0.9);
+        }
+
+        #weather p {
+            float: left;
+            padding-left: 25px;
+            text-shadow: 0 0 1px lightgrey;
+        }
+
+        /*下一组*/
+        #next {
+            height: 10px;
+            width: 40%;
+            opacity: 0;
+            transition: height,opacity 0.5s,0.6s;
+        }
+
+        #next:hover {
+            transition: height,opacity 0.5s,0.6s;
+            opacity: 0.8;
+            cursor: pointer;
+            height: 30px;
+        }
+
+    </style>
+</head>
+
+<!-- ==================================================== -->
+
+<body onload="loadEngine();randomHolder();changeImg();changeColor(1);displayWeather()">
+    <div id="refreshImg">
+        <img src="pic/refresh.png" alt="refresh" id="refresher" onclick="changeImg()">
+    </div>
+
+    <div id="colorTest"  onclick="changeColor(0)">
+        <div class="colorTester" id="test1"></div>
+        <div class="colorTester" id="test2"></div>
+    </div>
+
+    <img id="fix" src="pic/fix.png" alt="" onclick="fixUnderpart()">
+
+
+    <!--<img src="#" alt="forColor" id="forColor" style="opacity:1; width: 30px; height: 30px; border: 1px solid;">-->
+
+    <div id="main" class="breathing">
+        <!--天气-->
+        <div id="weather">
+            <!--<p id="week">Sun.</p>-->
+            <!--<p id="date">2018/8/10</p>-->
+        </div>
+
+        <!--搜索-->
+        <div id="search">
+            <table id="searcher">
+                <tr>
+                    <td id="image" style="vertical-align:bottom; text-align:center;">
+                        <select id="switcher" name="switch" onchange="changeEngine()">
+                            <option value="google" id="google">谷歌</option>
+                            <option value="baidu" id="baidu">百度</option>
+                        </select>
+                    </td>
+                    <td id="searchBox">
+                        <input type="text" id="searchPlace" placeholder="Search here..." onkeypress="if(event.keyCode==13) search()">
+                    </td>
+                    <td id="searchButton">
+                        <img src="pic/search.png" alt="search" onclick="search()">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="underpart">
+            <div class="blocks" id="facebook" onclick="window.open('https://www.facebook.com/')">
+                <span>Facebook</span>
+            </div>
+
+            <div class="blocks" id="stream" onclick="window.open('https://stream.massey.ac.nz/')">
+                <span>Stream</span>
+            </div>
+
+            <div class="blocks" id="gmail" onclick="window.open('https://mail.google.com/mail/')">
+                <span>Gmail</span>
+            </div>
+
+            <div class="blocks" id="github" onclick="window.open('https://github.com/')">
+                <span>GitHub</span>
+            </div>
+
+            <div class="blocks" id="qqmail" onclick="window.open('https://mail.qq.com/')">
+                <span>QQ邮箱</span>
+            </div>
+
+            <div class="blocks" id="qixiange" onclick="window.open('https://www.7xaudio.com/')">
+                <span>七线阁</span>
+            </div>
+
+            <div class="blocks" id="youtube" onclick="window.open('https://www.youtube.com/?hl=zh-CN')">
+                <span>Youtube</span>
+            </div>
+
+            <div class="blocks" id="baiduyun" onclick="window.open('https://pan.baidu.com/disk/home?')">
+                <span>百度云盘</span>
+            </div>
+
+            <img id="next" src="pic/next.png" onclick="nextGroup()">
+            <!-- <div id="test" style="width: 100px; height: 100px; background-color: red;" onclick="test()">
+            	
+            </div> -->
+
+            <!--<div id="addNew" class="blocks">-->
+                <!--<img src="pic/add.png" alt="add new tag">-->
+            <!--</div>-->
+
+
+
+        </div>
+    </div>
+</body>
+
+<!-- ======================================================= -->
+
+<script type="text/javascript">
+	function test() {
+		$.ajax({
+			url: '/path/to/file',
+			type: 'GET',
+			dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+			data: {param1: 'value1'},
+		})
+		.done(function() {
+			console.log("success");
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+		
+	}
+
+
+    // 随机数发生器
+    function selectfrom (lowValue,highValue){
+        var choice = highValue-lowValue+1;
+        return parseInt(Math.floor(Math.random() * choice + lowValue));
+    }
+    
+    // 时钟
+    function displayWeather() {
+        var myDate = new Date();
+        var year = myDate.getFullYear();
+        var month = myDate.getMonth();
+        var date = myDate.getDate();
+        var day = myDate.getDay();
+
+        switch (month){
+            case 0: month = "Jan"; break;
+            case 1: month = "Feb"; break;
+            case 2: month = "Mar"; break;
+            case 3: month = "Apr"; break;
+            case 4: month = "May"; break;
+            case 5: month = "Jun"; break;
+            case 6: month = "Jul"; break;
+            case 7: month = "Aug"; break;
+            case 8: month = "Sep"; break;
+            case 9: month = "Oct"; break;
+            case 10: month = "Nov"; break;
+            case 11: month = "Dec"; break;
+        }
+
+        switch (day){
+            case 1: day = "Monday";break;
+            case 2: day = "Tuesday";break;
+            case 3: day = "Wednesday";break;
+            case 4: day = "Thursday";break;
+            case 5: day = "Friday";break;
+            case 6: day = "Saturday";break;
+            case 0: day = "Sunday";break;
+        }
+
+        $("#weather").empty();
+        $("#weather").append("<p>" + month + " " + date + ", " + year + "</p>");
+        $("#weather").append("<p>" + day + "</p>");
+
+
+        // 定位
+        // var longtitude = 0,latitude = 0;
+        // navigator.geolocation.getCurrentPosition(function(position) {
+        //     latitude = position.coords.latitude;
+        //     longtitude = position.coords.longitude;
+        //     // console.log(latitude,longtitude);
+        // });
+        // var location = [longtitude,latitude];
+        // getWeatherData(location,myDate)
+        setTimeout(function(){displayWeather();},30000);
+    }
+
+    // 获取天气数据
+    function getWeatherData(location,date) {
+
+    }
+    
+    // 下一组图标
+    var group = [
+        {"name":"哔哩哔哩","id":"bilibili","pic":"bilibili.png","url":"https://www.bilibili.com/"},
+        {"name":"Google Cloud","id":"gcloud","pic":"GoogleCloud.jpg","url":"https://cloud.google.com/"},
+        {"name":"Google文档","id":"gdoc","pic":"gdoc.png","url":"https://www.google.com/intl/zh-CN/docs/about/"},
+        {"name":"armMBED","id":"armMBED","pic":"armMBED.png","url":"https://os.mbed.com/platforms/ST-Nucleo-F446RE/"},
+        // {"name":"","id":"","pic":"icos/","url":""},
+        // {"name":"","id":"","pic":"icos/","url":""},
+        // {"name":"","id":"","pic":"icos/","url":""},
+        // {"name":"","id":"","pic":"icos/","url":""},
+        // {"name":"","id":"","pic":"icos/","url":""},
+        // {"name":"","id":"","pic":"icos/","url":""}
+    ];
+
+    function nextGroup() {
+        console.log("nextGroup");
+        for(var i = 0;i<group.length;i++) {
+            console.log(group[i]);
+
+            var id = group[i].id;
+            var name = group[i].name;
+            var pic = group[i].pic;
+            var url = group[i].url;
+
+            var text = '<div class = "blocks" id = "' + id + '" style = "background: url(\'icos/' + pic + '\');background-size: cover;background-position: center;" onclick="window.open(\'' + url + '\')"><span>' + name + '</span></div> ';
+            $("#next").before(text);
+        }
+        group.splice(0,i);
+    }
+
+    // 设置背景
+    function changeImg() {
+        var bgs = [];
+        for(i=1;i<=39;i++){
+            bgs.push(i + ".jpg");
+        }
+        var index = Math.floor(Math.random()*bgs.length);
+        var url  = bgs[index];
+        // document.getElementById("forColor").src = "color/" + url;
+        var body = $("body");
+        body.css("background-color", "black");
+        body.css("background", "url(bg/" + url + ") no-repeat");
+        body.css("background-size", "auto auto");
+        body.css("-moz-background-size", "auto");
+        body.css("background-position", "center");
+    }
+
+    // 呼吸灯颜色
+    function selectColor() {
+        var r,g,b;
+        r = selectfrom(150,255);
+        g = selectfrom(150,255);
+        b = selectfrom(150,255);
+        return [r,g,b,0.75];
+    }
+
+    function changeColor(s) {
+        var rgba1;
+        var rgba2;
+        if(localStorage.getItem("rgba1") && localStorage.getItem("rgba2") && s){
+            rgba1 = localStorage.getItem("rgba1");
+            rgba2 = localStorage.getItem("rgba2");
+            console.log("读取");
+        } else {
+            rgba1 = selectColor();
+            rgba2 = selectColor();
+            console.log("更新");
+        }
+        localStorage.setItem("rgba1",rgba1.toString());
+        localStorage.setItem("rgba2",rgba2.toString());
+        // var colorSet = [rgba1,rgba2];
+        var c1 = "rgba(" + rgba1 + ")";
+        var c2 = "rgba(" + rgba2 + ")";
+        var text =
+            "@-webkit-keyframes 'breath' {\n" +
+            "       from {\n" +
+            "                -webkit-box-shadow:0 0 15px " + c1 + ";\n" +
+            "                -moz-box-shadow:0 0 15px " + c1 + ";\n" +
+            "                -ms-box-shadow:0 0 15px " + c1 + ";\n" +
+            "                -o-box-shadow:0 0 15px " + c1 + ";\n" +
+            "                box-shadow:0 0 15px " + c1 + ";\n" +
+            "            }\n" +
+            "            25% {\n" +
+            "                -webkit-box-shadow:0 0 40px " + c2 + ";\n" +
+            "                -moz-box-shadow:0 0 40px " + c2 + ";\n" +
+            "                -ms-box-shadow:0 0 40px " + c2 + ";\n" +
+            "                -o-box-shadow:0 0 40px " + c2 + ";\n" +
+            "                box-shadow:0 0 40px " + c2 + ";\n" +
+            "            }\n" +
+            "            50% {\n" +
+            "                -webkit-box-shadow:0 0 15px " + c2 + ";\n" +
+            "                -moz-box-shadow:0 0 15px " + c2 + ";\n" +
+            "                -ms-box-shadow:0 0 15px " + c2 + ";\n" +
+            "                -o-box-shadow:0 0 15px " + c2 + ");\n" +
+            "                box-shadow:0 0 15px " + c2 + ";\n" +
+            "            }\n" +
+            "            75% {\n" +
+            "                -webkit-box-shadow:0 0 40px " + c1 + ";\n" +
+            "                -moz-box-shadow:0 0 40px " + c1 + ";\n" +
+            "                -ms-box-shadow:0 0 40px " + c1 + ";\n" +
+            "                -o-box-shadow:0 0 40px " + c1 + ";\n" +
+            "                box-shadow:0 0 40px " + c1 + ";\n" +
+            "            }\n" +
+            "            to {\n" +
+            "                -webkit-box-shadow:0 0 15px " + c1 + ";\n" +
+            "                -moz-box-shadow:0 0 15px " + c1 + ";\n" +
+            "                -ms-box-shadow:0 0 15px " + c1 + ";\n" +
+            "                -o-box-shadow:0 0 15px " + c1 + ";\n" +
+            "                box-shadow:0 0 15px " + c1 + ";\n" +
+            "            }";
+        var style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = text.replace(/A_DYNAMIC_VALUE/g, "180deg");
+        document.getElementsByTagName('head')[0].appendChild(style);
+
+        $("#test1").css("background",c1);
+        $("#test2").css("background",c2);
+    }
+
+    // 加载上次的引擎设置
+    function loadEngine() {
+        try{
+            var loadedEngine = localStorage.getItem("engine");
+            console.log(loadedEngine);
+            document.getElementById(loadedEngine).selected = "selected";
+        } catch(e){
+            console.log("No saved data.");
+            document.getElementById("google").selected = "selected";
+        }
+        changeEngine();
+    }
+
+    //随机生成placeholder
+    function randomHolder() {
+        var holders = ["Search here ...",
+                        "What do u want to know ?",
+                        "Get something new here !",
+                        "What are u wondering ?",
+                        "I can answer your question ~"];
+        var num = Math.floor(Math.random()*holders.length);
+        document.getElementById("searchPlace").placeholder = holders[num]
+    }
+
+    // 改变引擎
+    function changeEngine() {
+        var switcher = document.getElementById("switcher");
+        var path = "pic/" + switcher.value + ".png";
+        switcher.style.backgroundImage = 'url(' + path + ')';
+        localStorage.setItem("engine",document.getElementById("switcher").value.toString());
+    }
+
+    // 搜索
+    function search() {
+        var text = document.getElementById("searchPlace").value;
+        var engine = document.getElementById("switcher").value;
+        if(engine == "google"){
+            url = "https://www.google.com.hk/search?safe=strict&source=hp&ei=vvBWW7H7Oo2moASp9YjYAw&q="
+                + text
+                + "&oq=++&gs_l=psy-ab.1.0.35i39k1l10.2351.2555.0.3613.4.3.0.0.0.0.197.387.0j2.3.0....0...1c.1.64.psy-ab..1.3.609.10...222.-U3T9CJazaM";
+            window.open(url,"_blank");
+        }else if(engine == "baidu"){
+            var url = "https://www.baidu.com/s?wd="
+                + text
+                + "&tn=98012088_2_dg&ch=8";
+            window.open(url,"_blank");
+        } else {
+            error("Error!");
+        }
+        document.getElementById("searchPlace").value = "";
+    }
+
+    //固定快速入口
+    function fixUnderpart() {
+        if($("#underpart").css("opacity") != 1){
+            $("#underpart").css("opacity",'1');
+        } else {
+            $("#underpart").removeAttr("style");
+        }
+    }
+
+</script>
+
+
+</html>

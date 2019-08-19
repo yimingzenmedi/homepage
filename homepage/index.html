@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<link rel="shortcut icon" href="favicon.ico">
+    <script src="js/color-thief.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+    <style type="text/css">
+
+    	*{
+            box-sizing: border-box;
+        }
+
+        html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+        	height: 100%;
+        }
+
+        /*hidden buttons:*/
+        #hiddenButtons {
+			list-style: none;
+			position: fixed;
+			margin: 8px;
+		}
+		
+		#hiddenButtons li {
+			height: 16px;
+			width: 16px;
+			opacity: 0;
+            transition: opacity 1s;
+            margin-bottom: 5px;
+		}
+
+		#hiddenButtons li:hover {
+            opacity: 1;
+            transition: opacity 1s;
+            cursor: help;
+        }
+
+        #hiddenButtons img {
+        	max-width: 16px;
+        	max-height: 16px;
+        }
+
+        /*light button*/
+        #colorTest {
+        	width: 100%;
+        	height: 100%;
+        }
+        .colorTester {
+        	width: 100%;
+        	height: 50%;
+        }
+
+        /*main - bg:*/
+        #mainBG {
+            width: 80%;
+            min-width: 550px;
+            min-height: 100%;
+            position: fixed;
+            z-index: -98;
+            top: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            background-color: rgba(255,255,235,0.4);
+            margin-left: 10%;
+        }
+
+        /*bgFrom*/
+        #bgFrom {
+            position: fixed;
+            left: 5px;
+            bottom: 10px;
+            font-size: 0.7em;
+            text-shadow: 1px white;
+            color: darkgrey;
+        }
+
+        #bgFromTarget {
+            color: darkgrey;
+        }
+
+        #bgFromTarget:hover {
+            color: white;
+        }
+
+        /*version*/
+        #version {
+            color: darkgrey;
+            font-size: 0.7em;
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        /*breath*/
+        #mainBG {
+        	/*copied:*/
+            -webkit-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+            -moz-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+            -ms-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+            -o-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+            box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+
+            -webkit-animation-name: breath;
+            -webkit-animation-duration: 6s;     
+            -webkit-animation-timing-function: ease-in-out;
+            -webkit-animation-iteration-count: infinite;
+        }
+        @-webkit-keyframes 'breath' {
+	        0% {
+	            -webkit-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+	        	-moz-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+	        	-ms-box-shadow:0 0 2px rgba(250, 250, 143, 0.75); 
+	        	-o-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+	        	box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+			}
+	    	
+	        50% {
+	        	-webkit-box-shadow:0 0 20px rgba(250, 250, 143, 0.75);
+	        	-moz-box-shadow:0 0 20px rgba(250, 250, 143, 0.75);
+	        	-ms-box-shadow:0 0 20px rgba(250, 250, 143, 0.75);
+	        	-o-box-shadow:0 0 20px rgba(250, 250, 143, 0.75));
+	        	box-shadow:0 0 20px rgba(250, 250, 143, 0.75);
+	    	}	
+	        
+	        100% {
+	        	-webkit-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+	        	-moz-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+	        	-ms-box-shadow:0 0 2px rgba(250, 250, 143, 0.75); 
+	        	-o-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+	        	box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+	        }
+	    }
+
+	    /*main*/
+        #main {
+        	width: 100%;
+            min-height: 100%;
+            position: absolute;
+            top: 0;
+            margin: 0;          
+        } 
+        
+        /*reserved*/
+        #reserved {
+        	height: 130px;
+        	width: 100%;
+        }
+
+        /*search box*/
+        /*frame*/
+        #search {
+            border: 1px solid rgba(253, 255, 254, 0);
+            width: 400px;
+            height: 45px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            background-color: rgba(255,255,255,0.75);
+            transition: box-shadow 0.3s;
+            box-shadow: 0 0 10px rgba(215, 217, 210, 0.75);
+        }
+
+        #search:hover{
+            transition: box-shadow 0.3s, background-color 0.3s;
+            box-shadow: 0 0 20px rgba(245, 247, 240, 0.9);
+            background-color: rgba(255,255,255,1);
+        }
+
+        /*table*/
+        #searcher{
+            text-align: center;
+            margin-top: 2px;
+            border-collapse: collapse;
+            height: 40px;
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        #searcher tr {
+            height: 40px;
+            text-align: center;
+        }
+
+        #searcher td {
+            height: 40px;
+            vertical-align: middle;
+            text-align: center;
+            background: none;
+            /*border: 1px solid;*/
+        }
+
+        /*icon*/
+        #searcher select {
+            height: 40px;
+            width: 110px;
+            margin: 0;
+            outline: 0;
+            border: none;
+            text-align: center;
+            vertical-align: middle;
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: rgba(255,255,255,0);
+            background-color: rgba(255,255,255,0);
+            cursor: pointer;
+        }
+
+        #searcher option {
+            max-height: 35px;
+            max-width: 100px;
+            color: black;
+            text-align: center;
+            border: none;
+        }
+
+        /*search bar*/
+        #searcher input {
+            width: 250px;
+            outline: 0;
+            background: none;
+            border: 0;
+            border-left: 1px solid grey;
+            padding-left: 20px;
+            height: 60%;
+            font-size: 1.05em;
+       }
+
+        /*button*/
+        #searchButton {
+            width: 40px;
+            height: 40px;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(50,50,50,0.5);
+        }
+
+        #searchButton img {
+            width: 30px;
+            margin: 0;
+            padding: 0;
+            margin-top: 5px;
+            cursor: pointer;
+            transition: opacity 0.1s;
+            opacity: 0.2;
+        }
+
+        #searchButton img:hover {
+            transition: opacity 0.1s;
+            opacity: 0.4;
+        }
+
+        /*tags*/
+        #tags {
+            width: 78%;
+            min-width: 500px;
+            margin-top: 70px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5%;
+            padding-left: 5%;
+            padding-right: 5%;
+            overflow: hidden;
+            text-align: center;
+            align-items: center;
+            transition: 0.5s opacity;
+            opacity: 0;
+
+            display:flex;
+            display: -webkit-flex;
+
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        #tags:hover {
+            transition: 0.5s opacity;
+            opacity: 1;
+        }
+
+        .tag {
+        	border-radius: 10px;
+            width: 170px;
+            height: 130px;
+            background-color: rgb(250,250,250);
+            float: left;
+            margin-right: 1.775%;
+            margin-left: 1.775%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            transition: opacity 0.3s, box-shadow 0.3s, background-size 0.3s;
+            opacity: 0.6;
+            white-space: nowrap;
+            text-align: center;
+            overflow: hidden;
+            /*background-size: cover;*/
+            background-size: 100%;
+            background-position: center;
+            flex-grow: 0.1;
+            box-shadow: 0 0 2px rgba(200,200,200,0.5);
+        }
+
+        .tag:hover {
+            transition: opacity 0.3s, box-shadow 0.3s, background-size 0.3s;
+            opacity: 0.95;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(200,200,200,1);
+            background-size: 120%;
+        }
+
+        .info {
+            color: rgba(80,80,80,0.7);
+            padding-top: 3px;
+            text-shadow: 0 0 1px rgba(250, 250, 250, 0.7);
+        }
+        .deleteTag {
+            color: rgba(180,80,80,0.7);
+            float: right;
+            padding-right: 20px;
+            width: 0;
+            height: 0;
+        }
+        .deleteTag:hover {
+            color: red;
+            transform: scale(1.3);
+        }
+
+
+        /*add*/
+        #add {
+            background-image: url(pic/add.png);
+            background-color: rgba(255,255,255,0.3);
+            border: 1px solid rgba(250, 250, 250, 0.8);
+            opacity: 0.5;
+        }
+
+        #add:hover {
+            opacity: 0.9;
+        }
+    </style>
+
+	<title>HOME</title>
+</head>
+<body>
+	<div id="bg" :style="styleObject()"></div>
+	<!-- ======================================================================================= -->
+	
+    <div id="main">
+    	<ul id="hiddenButtons">
+			<li @click="changeImg()" id="refreshImg">
+	        	<img src="pic/refresh.png" alt="refreshBackground">
+			</li>
+			<li @click="fixTags()">
+				<img id="fix" src="pic/fix.png" alt="fixTags">
+			</li>
+		</ul>
+
+    	<div id="mainBG"></div>
+
+        <p id="bgFrom">
+            Background image from: <br>
+            <a id="bgFromTarget" href="https://wallpapercave.com/" target="_blank">https://wallpapercave.com</a>
+        </p>
+        <p id="version">v1.1</p>
+    	<div id="reserved"></div>
+
+    	<div id="search"> 
+            <table id="searcher">
+                <tr>
+                    <td style="vertical-align:bottom; text-align:center;">
+                        <select id="switcher" name="switch" @change="changeEngine()" v-model="picked">
+                            <option v-for="engine in searchEngines" :value="engine.name" :id="engine.name">{{engine.name}}</option>
+                        </select>
+                    </td>
+                    <td id="searchBox">
+                        <input type="text" id="searchPlace" autofocus="autofocus" :placeholder="randomHolder()" @keypress="if(event.keyCode==13) search()" v-model="text" @focus="focus()" @blur="blur()">
+                    </td>
+                    <td id="searchButton">
+                        <img src="pic/search.png" tabindex="0" alt="search" @click="search()" >
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="tags">
+        	<div class="tag" v-for="site in userSites" @click="openTag(site.url)" :style="{backgroundImage: 'url(' + encodeURI(site.imgPath) + ')'}">
+                <span class="info">{{site.name}}</span>
+                <span class="deleteTag" @click="deleteTag($event)">x</span>
+            </div>
+            <div class="tag" id="add" @click="addNewTag($event)">
+                <span class="info">
+                    add new tag
+                </span>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+
+	Vue.prototype.bgUrl = function(){
+		var index = Math.floor(Math.random()*44);
+        var url  = "url('bg/"+index+".jpg')";
+		return url;
+	};
+
+	Vue.prototype.randomColor = function(){
+		var r,g,b;
+        r = Math.floor(Math.random()*255);
+        g = Math.floor((0.4 + Math.random() / 2) * 255);
+        b = Math.floor((0.3 + Math.random() / 5) * 255);
+        return "rgba(" + [r,g,b,0.8] + ")";
+	};
+
+	new Vue({
+		el: "#hiddenButtons",
+		data: {
+			hideTags: true,
+		},
+		methods: {
+			changeImg(){
+				var div = document.getElementById("bg");
+				div.style.backgroundImage = this.bgUrl();
+			},
+
+			fixTags(){
+				this.hideTags = !this.hideTags;
+				if(this.hideTags){
+					document.getElementById("tags").removeAttribute("style");
+				} else {
+					document.getElementById("tags").style.opacity=1;
+				}
+				
+			},
+		},
+	});
+
+	new Vue({
+		el: "#mainBG",
+		data: {
+			lightColor:"",
+		},
+		methods:{
+			findKeyframesRule(name){
+				var ss = document.styleSheets;
+				for(var i=0; i<ss.length; i++){
+					for(var j=0; j<ss[i].cssRules.length; j++){
+						var rule = ss[i].cssRules[j];
+						if(rule.name == name && (rule.tyle == window.CSSRule.KEYFRAMES_RULE) || rule.style == window.CSSRule.WEBKIT_KEYFRAMES_RULE){
+							return rule;
+						}
+					}
+				}
+				return null;
+			},
+			breathStyleRefresh(){
+				this.lightColor = this.randomColor();
+				var keyframes = this.findKeyframesRule("breath");
+				// console.log(this.lightColor);
+				keyframes.deleteRule("0%");
+				keyframes.deleteRule("50%");
+				keyframes.deleteRule("100%");
+
+				var newRule1 = "{" + 
+		            "-webkit-box-shadow: 0 0 2px " + this.lightColor +";" +
+		            "-moz-box-shadow: 0 0 2px " + this.lightColor +";" +
+		            "ms-box-shadow: 0 0 2px " + this.lightColor +";" +
+		            "-o-box-shadow: 0 0 2px " + this.lightColor +";" +
+		            "box-shadow: 0 0 2px " + this.lightColor +";" +
+				"}";
+				var newRule2 = "{" + 
+		            "-webkit-box-shadow: 0 0 30px " + this.lightColor +";" +
+		            "-moz-box-shadow: 0 0 30px " + this.lightColor +";" +
+		            "ms-box-shadow: 0 0 30px " + this.lightColor +";" +
+		            "-o-box-shadow: 0 0 30px " + this.lightColor +";" +
+		            "box-shadow: 0 0 30px " + this.lightColor +";" +
+				"}";
+
+		    	keyframes.appendRule("from" + newRule1);
+		    	keyframes.appendRule("50%" + newRule2);
+		    	keyframes.appendRule("to" + newRule1);
+			},
+		},
+		mounted: function(){
+			this.breathStyleRefresh();
+			setInterval(this.breathStyleRefresh, 6000);
+		},
+	});
+
+	new Vue({
+		el: "#bg",
+		methods: {
+			styleObject: function(){
+				return {
+					"background-image": this.bgUrl(),
+					"background-repeat": " no-repeat",
+					"background-position": "center",
+					"background-size": "cover",
+					"position": "fixed",
+					"height": "100%",
+					"width": "100%",
+					"z-index": "-100",
+				};
+			},
+		}
+	});
+
+
+
+	new Vue({
+		el: '#search',
+		data: {
+			searchEngines: [
+		  		{ name: 'Google'},
+		  		{ name: 'Bing'},
+		  		{ name: 'Baidu'}
+			],
+			picked: "Google",
+			text: "",
+		},
+		methods: {
+			changeEngine(){
+				var switcher = document.getElementById("switcher");
+        		var path = "pic/" + this.picked + ".png";
+        		switcher.style.backgroundImage = 'url(' + path + ')';
+        		localStorage.setItem("engine",this.picked);
+			},
+			search(){
+				var url;
+				if(this.picked == "Google"){
+					url = "https://www.google.com.hk/search?&sourceid=chrome&ie=UTF-8&q=" + encodeURIComponent(this.text);
+				} else if(this.picked == "Bing"){
+					url = "https://www.bing.com/search?ensearch=1&q=" + encodeURIComponent(this.text);
+				} else if(this.picked == "Baidu"){
+					url = "https://www.baidu.com/s?wd=" + encodeURIComponent(this.text);
+				}
+				window.open(url,"_blank");
+				this.randomHolder();
+			},
+			randomHolder(){
+		        var holders = [ 
+		        	" Search here ...",
+                    " What do u want to know ?",
+                    " Get something new here !",
+                    " What are u wondering ?",
+                    " I can answer your question ~",
+                    " Ask me anything ."
+            	];
+		        var index = Math.floor(Math.random()*holders.length);
+		        return holders[index];
+		    },
+		    loadEngine(){
+		            var savedEngine = localStorage.getItem("engine");
+                    if(savedEngine == "Google" || savedEngine == "Bing" || savedEngine == "Baidu") {
+                        this.picked = savedEngine;
+                    }
+		    },
+            focus() {
+                document.getElementById("search").setAttribute('style', "background : rgba(255, 255, 255, 0.95); box-shadow: 0 0 20px rgba(245, 247, 240, 0.9);");
+                // document.getElementById("search").style.boxShadow = "0 0 20px rgba(225, 227, 220, 0.9);";
+            },
+            blur() {
+                document.getElementById("search").removeAttribute("style");
+            }
+		},
+		mounted: function(){
+			this.loadEngine();
+			this.changeEngine();
+		}
+	});
+
+	new Vue({
+		el: "#tags",
+		data: {
+			defaultSites: [
+				{name: "Youtube", url: "https://www.youtube.com", imgPath: "icos/youtube.ico",},
+				{name: "Bilibili", url: "https://www.bilibili.com/", imgPath: "icos/bilibili.ico",},
+				{name: "Gmail", url: "https://mail.google.com", imgPath: "icos/Gmail.ico",},
+				{name: "Google docs", url: "https://www.google.com/intl/zh-CN/docs/about/", imgPath: "icos/Google docs.ico",},
+				{name: "Github", url: "https://github.com/", imgPath: "icos/Github.ico",},
+				{name: "JD.com", url: "https://www.jd.com/", imgPath: "icos/JD.com.ico",},
+				{name: "TradeMe", url: "https://www.trademe.co.nz/", imgPath: "icos/TradeMe.ico",},
+				{name: "Facebook", url: "https://www.facebook.com/", imgPath: "icos/Facebook.ico",},
+				{name: "Twitter", url: "https://twitter.com/", imgPath: "icos/Twitter.ico",},
+				{name: "Instagram", url: "https://www.instagram.com/", imgPath: "icos/Instagram.ico",},
+				{name: "QQ mail", url: "https://mail.qq.com/", imgPath: "icos/QQ mail.ico",},
+			],
+			userSites: [],
+
+		},
+		methods: {
+			loadSites(){
+	            var savedSites = localStorage.getItem("savedSites");
+	            if(savedSites == null){
+	            	this.userSites = this.defaultSites;
+	            	localStorage.setItem("savedSites",JSON.stringify(this.userSites));
+	            } else{
+		            this.userSites = JSON.parse(savedSites);
+		        }
+		        // console.log(this.userSites);
+			},
+			openTag(url){
+				window.open(url,"_blank");
+			},
+            deleteTag(event){
+                // stop bubble
+                var e = (event) ? event : window.event;
+                if (window.event) {
+                    e.cancelBubble = true;
+                }
+                else {
+                    e.stopPropagation();
+                }
+
+                var r = confirm("Delete this tag?")
+                if(r){               
+                    var target = event.target.parentNode.firstElementChild.innerHTML;
+                    
+                    for (var i=0; i<this.userSites.length; i++) {
+                        if(this.userSites[i].name == target) {
+                            this.userSites.splice(i, 1);
+                            break;
+                        }
+                    }
+                    localStorage.setItem("savedSites",JSON.stringify(this.userSites));
+                }
+            },
+            addNewTag(e){
+                var url = prompt("Enter the URL:");
+                if(url != null && url != "") {
+                    for(i in this.userSites) {
+                        var site = this.userSites[i];
+                        if(site.url.toLowerCase() == url.toLowerCase()) {
+                            alert("Sorry, this URL has existed");
+                            return;
+                        }
+                    }
+
+                    // predict name:
+                    var prediction = "";
+                    var urlParts = url.split("//");
+                    if(urlParts.length == 2){
+                        urlParts = urlParts[1];
+                    } else {
+                        urlParts = urlParts[0];
+                    }
+                    var mainUrl = urlParts.split("/")[0];
+                    var mainUrlParts = mainUrl.split(".");
+                    if(mainUrlParts[0] == "www"){
+                        prediction = mainUrlParts[1];
+                    } else {
+                        prediction = mainUrlParts[0];
+                    }
+
+                    var name = prompt("Enter the name:", prediction);
+                    if(name != null && name != "") {
+                        for(i in this.userSites) {
+                            var site = this.userSites[i];
+                            if(site.name.toLowerCase() == name.toLowerCase()) {
+                                alert("Sorry, this name has existed");
+                                return;
+                            }
+                        }
+
+                        var imgPath = "icos"
+                        for(i in this.defaultSites) {
+                            var site = this.defaultSites[i];
+                            if(site.name.toLowerCase() == name.toLowerCase() && site.url.toLowerCase().indexOf(url.toLowerCase()) > -1) {
+                                this.userSites.push(site);
+                                localStorage.setItem("savedSites",JSON.stringify(this.userSites));
+                                return;
+                            }
+                        }
+
+                        var newTagObj = {
+                            name: name,
+                            url: url,
+                            imgPath: "icos/default.ico",
+                        }
+                        this.userSites.push(newTagObj);
+                        localStorage.setItem("savedSites",JSON.stringify(this.userSites));
+                    
+                    } else {
+                        alert("Please enter a name")
+                    }
+
+
+                } else {
+                    alert("Please enter a URL");
+                }
+            }
+		},
+		mounted: function(){
+			this.loadSites();
+		}
+	});
+
+
+</script>
