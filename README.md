@@ -37,7 +37,7 @@ More features are being imagined...
 
 ## Sample
 
-![image](https://raw.githubusercontent.com/yimingzenmedi/homepage/master/homepage/homepage_sample.png)
+![image](https://raw.githubusercontent.com/yimingzenmedi/homepage/master/homepage/sample.gif)
 
 --------------------------------------------
 
