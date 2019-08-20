@@ -35,6 +35,12 @@ More features are being imagined...
 
 -------------------------------------------
 
+## Sample
+
+![image](https://raw.githubusercontent.com/yimingzenmedi/homepage/master/homepage/homepage_sample.png)
+
+--------------------------------------------
+
 ***Enjoy your journey with it!***
 
 
