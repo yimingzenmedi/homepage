@@ -376,14 +376,14 @@
             <table id="searcher">
                 <tr>
                     <td style="vertical-align:bottom; text-align:center;">
-                        <select id="switcher" name="switch" @change="changeEngine()" v-model="picked">
+                        <select id="switcher" name="switch" @change="changeEngine()" v-model="picked" title="Change search engine">
                             <option v-for="engine in searchEngines" :value="engine.name" :id="engine.name">{{engine.name}}</option>
                         </select>
                     </td>
                     <td id="searchBox">
                         <input type="text" id="searchPlace" autofocus="autofocus" :placeholder="randomHolder()" @keypress="if(event.keyCode==13) search()" v-model="text" @focus="focus()" @blur="blur()">
                     </td>
-                    <td id="searchButton">
+                    <td id="searchButton" title="Search!">
                         <img src="pic/search.png" tabindex="0" alt="search" @click="search()" >
                     </td>
                 </tr>
