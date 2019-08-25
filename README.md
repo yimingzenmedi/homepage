@@ -1,7 +1,7 @@
 # homepage
 Homemade homepage : )
 
-**NOTE**: Only adapted for ***Google Chrome***
+**NOTE**: Only adapted for ***Google Chrome***. If need to run on ***Edge***, you need to *run it on a server* bacause Edge *does not support local storage for local pages*.
 
 This is a navigation website mainly implemented by Vue.js. It contains ~~version 1.0~~ (home.html) and version 1.1 (index.html). All the background pictures are from [wallpapercave](https://wallpapercave.com/). Version 1.1 is recommanded. The following introduction is also based on v1.1.
 
