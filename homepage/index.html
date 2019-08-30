@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="favicon.ico">
+	<link rel="shortcut icon" href="favicon.ico">
     <script type="text/javascript" src="js/vue.min.js"></script>
 
     <style type="text/css">
@@ -404,169 +404,167 @@
     </div>
 
 </body>
-</html>
 
 
+<script type="text/javascript" language="javascript">
 
-<script type="text/javascript">
-
-	Vue.prototype.bgUrl = function(){
-		var index = Math.floor(Math.random()*44);
+    Vue.prototype.bgUrl = function(){
+        var index = Math.floor(Math.random()*44);
         var url  = "url('bg/"+index+".jpg')";
-		return url;
-	};
+        return url;
+    };
 
-	Vue.prototype.randomColor = function(){
-		var r,g,b;
+    Vue.prototype.randomColor = function(){
+        var r,g,b;
         r = Math.floor(Math.random()*255);
         g = Math.floor((0.4 + Math.random() / 2) * 255);
         b = Math.floor((0.3 + Math.random() / 5) * 255);
         return "rgba(" + [r,g,b,0.8] + ")";
-	};
+    };
 
-	new Vue({
-		el: "#hiddenButtons",
-		data: {
-			hideTags: true,
-		},
-		methods: {
-			changeImg(){
-				var div = document.getElementById("bg");
-				div.style.backgroundImage = this.bgUrl();
-			},
+    new Vue({
+        el: "#hiddenButtons",
+        data: {
+            hideTags: true,
+        },
+        methods: {
+            changeImg(){
+                var div = document.getElementById("bg");
+                div.style.backgroundImage = this.bgUrl();
+            },
 
-			fixTags(){
-				this.hideTags = !this.hideTags;
-				if(this.hideTags){
-					document.getElementById("tags").removeAttribute("style");
-				} else {
-					document.getElementById("tags").style.opacity=1;
-				}
-				
-			},
-		},
-	});
+            fixTags(){
+                this.hideTags = !this.hideTags;
+                if(this.hideTags){
+                    document.getElementById("tags").removeAttribute("style");
+                } else {
+                    document.getElementById("tags").style.opacity=1;
+                }
+                
+            },
+        },
+    });
 
-	new Vue({
-		el: "#mainBG",
-		data: {
-			lightColor:"",
-		},
-		methods:{
-			findKeyframesRule(name){
-				var ss = document.styleSheets;
-				for(var i=0; i<ss.length; i++){
-					for(var j=0; j<ss[i].cssRules.length; j++){
-						var rule = ss[i].cssRules[j];
-						if(rule.name == name && (rule.tyle == window.CSSRule.KEYFRAMES_RULE) || rule.style == window.CSSRule.WEBKIT_KEYFRAMES_RULE){
-							return rule;
-						}
-					}
-				}
-				return null;
-			},
-			breathStyleRefresh(){
-				this.lightColor = this.randomColor();
-				var keyframes = this.findKeyframesRule("breath");
-				// console.log(this.lightColor);
-				keyframes.deleteRule("0%");
-				keyframes.deleteRule("50%");
-				keyframes.deleteRule("100%");
+    new Vue({
+        el: "#mainBG",
+        data: {
+            lightColor:"",
+        },
+        methods:{
+            findKeyframesRule(name){
+                var ss = document.styleSheets;
+                for(var i=0; i<ss.length; i++){
+                    for(var j=0; j<ss[i].cssRules.length; j++){
+                        var rule = ss[i].cssRules[j];
+                        if(rule.name == name && (rule.tyle == window.CSSRule.KEYFRAMES_RULE) || rule.style == window.CSSRule.WEBKIT_KEYFRAMES_RULE){
+                            return rule;
+                        }
+                    }
+                }
+                return null;
+            },
+            breathStyleRefresh(){
+                this.lightColor = this.randomColor();
+                var keyframes = this.findKeyframesRule("breath");
+                // console.log(this.lightColor);
+                keyframes.deleteRule("0%");
+                keyframes.deleteRule("50%");
+                keyframes.deleteRule("100%");
 
-				var newRule1 = "{" + 
-		            "-webkit-box-shadow: 0 0 2px " + this.lightColor +";" +
-		            "-moz-box-shadow: 0 0 2px " + this.lightColor +";" +
-		            "ms-box-shadow: 0 0 2px " + this.lightColor +";" +
-		            "-o-box-shadow: 0 0 2px " + this.lightColor +";" +
-		            "box-shadow: 0 0 2px " + this.lightColor +";" +
-				"}";
-				var newRule2 = "{" + 
-		            "-webkit-box-shadow: 0 0 30px " + this.lightColor +";" +
-		            "-moz-box-shadow: 0 0 30px " + this.lightColor +";" +
-		            "ms-box-shadow: 0 0 30px " + this.lightColor +";" +
-		            "-o-box-shadow: 0 0 30px " + this.lightColor +";" +
-		            "box-shadow: 0 0 30px " + this.lightColor +";" +
-				"}";
+                var newRule1 = "{" + 
+                    "-webkit-box-shadow: 0 0 2px " + this.lightColor +";" +
+                    "-moz-box-shadow: 0 0 2px " + this.lightColor +";" +
+                    "ms-box-shadow: 0 0 2px " + this.lightColor +";" +
+                    "-o-box-shadow: 0 0 2px " + this.lightColor +";" +
+                    "box-shadow: 0 0 2px " + this.lightColor +";" +
+                "}";
+                var newRule2 = "{" + 
+                    "-webkit-box-shadow: 0 0 30px " + this.lightColor +";" +
+                    "-moz-box-shadow: 0 0 30px " + this.lightColor +";" +
+                    "ms-box-shadow: 0 0 30px " + this.lightColor +";" +
+                    "-o-box-shadow: 0 0 30px " + this.lightColor +";" +
+                    "box-shadow: 0 0 30px " + this.lightColor +";" +
+                "}";
 
-		    	keyframes.appendRule("from" + newRule1);
-		    	keyframes.appendRule("50%" + newRule2);
-		    	keyframes.appendRule("to" + newRule1);
-			},
-		},
-		mounted: function(){
-			this.breathStyleRefresh();
-			setInterval(this.breathStyleRefresh, 6000);
-		},
-	});
+                keyframes.appendRule("from" + newRule1);
+                keyframes.appendRule("50%" + newRule2);
+                keyframes.appendRule("to" + newRule1);
+            },
+        },
+        mounted: function(){
+            this.breathStyleRefresh();
+            setInterval(this.breathStyleRefresh, 6000);
+        },
+    });
 
-	new Vue({
-		el: "#bg",
-		methods: {
-			styleObject: function(){
-				return {
-					"background-image": this.bgUrl(),
-					"background-repeat": " no-repeat",
-					"background-position": "center",
-					"background-size": "cover",
-					"position": "fixed",
-					"height": "100%",
-					"width": "100%",
-					"z-index": "-100",
-				};
-			},
-		}
-	});
+    new Vue({
+        el: "#bg",
+        methods: {
+            styleObject: function(){
+                return {
+                    "background-image": this.bgUrl(),
+                    "background-repeat": " no-repeat",
+                    "background-position": "center",
+                    "background-size": "cover",
+                    "position": "fixed",
+                    "height": "100%",
+                    "width": "100%",
+                    "z-index": "-100",
+                };
+            },
+        }
+    });
 
 
 
-	new Vue({
-		el: '#search',
-		data: {
-			searchEngines: [
-		  		{ name: 'Google'},
-		  		{ name: 'Bing'},
-		  		{ name: 'Baidu'}
-			],
-			picked: "Google",
-			text: "",
-		},
-		methods: {
-			changeEngine(){
-				var switcher = document.getElementById("switcher");
-        		var path = "pic/" + this.picked + ".png";
-        		switcher.style.backgroundImage = 'url(' + path + ')';
-        		localStorage.setItem("engine",this.picked);
-			},
-			search(){
-				var url;
-				if(this.picked == "Google"){
-					url = "https://www.google.com.hk/search?&sourceid=chrome&ie=UTF-8&q=" + encodeURIComponent(this.text);
-				} else if(this.picked == "Bing"){
-					url = "https://www.bing.com/search?ensearch=1&q=" + encodeURIComponent(this.text);
-				} else if(this.picked == "Baidu"){
-					url = "https://www.baidu.com/s?wd=" + encodeURIComponent(this.text);
-				}
-				window.open(url,"_blank");
-				this.randomHolder();
-			},
-			randomHolder(){
-		        var holders = [ 
-		        	" Search here ...",
+    new Vue({
+        el: '#search',
+        data: {
+            searchEngines: [
+                { name: 'Google'},
+                { name: 'Bing'},
+                { name: 'Baidu'}
+            ],
+            picked: "Google",
+            text: "",
+        },
+        methods: {
+            changeEngine(){
+                var switcher = document.getElementById("switcher");
+                var path = "pic/" + this.picked + ".png";
+                switcher.style.backgroundImage = 'url(' + path + ')';
+                localStorage.setItem("engine",this.picked);
+            },
+            search(){
+                var url;
+                if(this.picked == "Google"){
+                    url = "https://www.google.com.hk/search?&sourceid=chrome&ie=UTF-8&q=" + encodeURIComponent(this.text);
+                } else if(this.picked == "Bing"){
+                    url = "https://www.bing.com/search?ensearch=1&q=" + encodeURIComponent(this.text);
+                } else if(this.picked == "Baidu"){
+                    url = "https://www.baidu.com/s?wd=" + encodeURIComponent(this.text);
+                }
+                window.open(url,"_blank");
+                this.randomHolder();
+            },
+            randomHolder(){
+                var holders = [ 
+                    " Search here ...",
                     " What do u want to know ?",
                     " Get something new here !",
                     " What are u wondering ?",
                     " I can answer your question ~",
                     " Ask me anything ."
-            	];
-		        var index = Math.floor(Math.random()*holders.length);
-		        return holders[index];
-		    },
-		    loadEngine(){
-		            var savedEngine = localStorage.getItem("engine");
+                ];
+                var index = Math.floor(Math.random()*holders.length);
+                return holders[index];
+            },
+            loadEngine(){
+                    var savedEngine = localStorage.getItem("engine");
                     if(savedEngine == "Google" || savedEngine == "Bing" || savedEngine == "Baidu") {
                         this.picked = savedEngine;
                     }
-		    },
+            },
             focus() {
                 document.getElementById("search").setAttribute('style', "background : rgba(255, 255, 255, 0.95); box-shadow: 0 0 20px rgba(245, 247, 240, 0.9);");
                 // document.getElementById("search").style.boxShadow = "0 0 20px rgba(225, 227, 220, 0.9);";
@@ -574,46 +572,46 @@
             blur() {
                 document.getElementById("search").removeAttribute("style");
             }
-		},
-		mounted: function(){
-			this.loadEngine();
-			this.changeEngine();
-		}
-	});
+        },
+        mounted: function(){
+            this.loadEngine();
+            this.changeEngine();
+        }
+    });
 
-	new Vue({
-		el: "#tags",
-		data: {
-			defaultSites: [
-				{name: "Youtube", url: "https://www.youtube.com", imgPath: "icos/youtube.ico",},
-				{name: "Bilibili", url: "https://www.bilibili.com/", imgPath: "icos/bilibili.ico",},
-				{name: "Gmail", url: "https://mail.google.com", imgPath: "icos/Gmail.ico",},
-				{name: "Google docs", url: "https://www.google.com/intl/zh-CN/docs/about/", imgPath: "icos/Google docs.ico",},
-				{name: "Github", url: "https://github.com/", imgPath: "icos/Github.ico",},
-				{name: "JD.com", url: "https://www.jd.com/", imgPath: "icos/JD.com.ico",},
-				{name: "TradeMe", url: "https://www.trademe.co.nz/", imgPath: "icos/TradeMe.ico",},
-				{name: "Facebook", url: "https://www.facebook.com/", imgPath: "icos/Facebook.ico",},
-				{name: "Twitter", url: "https://twitter.com/", imgPath: "icos/Twitter.ico",},
-				{name: "Instagram", url: "https://www.instagram.com/", imgPath: "icos/Instagram.ico",},
-				{name: "QQ mail", url: "https://mail.qq.com/", imgPath: "icos/QQ mail.ico",},
-			],
-			userSites: [],
+    new Vue({
+        el: "#tags",
+        data: {
+            defaultSites: [
+                {name: "Youtube", url: "https://www.youtube.com", imgPath: "icos/youtube.ico",},
+                {name: "Bilibili", url: "https://www.bilibili.com/", imgPath: "icos/bilibili.ico",},
+                {name: "Gmail", url: "https://mail.google.com", imgPath: "icos/Gmail.ico",},
+                {name: "Google docs", url: "https://www.google.com/intl/zh-CN/docs/about/", imgPath: "icos/Google docs.ico",},
+                {name: "Github", url: "https://github.com/", imgPath: "icos/Github.ico",},
+                {name: "JD.com", url: "https://www.jd.com/", imgPath: "icos/JD.com.ico",},
+                {name: "TradeMe", url: "https://www.trademe.co.nz/", imgPath: "icos/TradeMe.ico",},
+                {name: "Facebook", url: "https://www.facebook.com/", imgPath: "icos/Facebook.ico",},
+                {name: "Twitter", url: "https://twitter.com/", imgPath: "icos/Twitter.ico",},
+                {name: "Instagram", url: "https://www.instagram.com/", imgPath: "icos/Instagram.ico",},
+                {name: "QQ mail", url: "https://mail.qq.com/", imgPath: "icos/QQ mail.ico",},
+            ],
+            userSites: [],
 
-		},
-		methods: {
-			loadSites(){
-	            var savedSites = localStorage.getItem("savedSites");
-	            if(savedSites == null){
-	            	this.userSites = this.defaultSites;
-	            	localStorage.setItem("savedSites",JSON.stringify(this.userSites));
-	            } else{
-		            this.userSites = JSON.parse(savedSites);
-		        }
-		        // console.log(this.userSites);
-			},
-			openTag(url){
-				window.open(url,"_blank");
-			},
+        },
+        methods: {
+            loadSites(){
+                var savedSites = localStorage.getItem("savedSites");
+                if(savedSites == null){
+                    this.userSites = this.defaultSites;
+                    localStorage.setItem("savedSites",JSON.stringify(this.userSites));
+                } else{
+                    this.userSites = JSON.parse(savedSites);
+                }
+                // console.log(this.userSites);
+            },
+            openTag(url){
+                window.open(url,"_blank");
+            },
             deleteTag(event){
                 // stop bubble
                 var e = (event) ? event : window.event;
@@ -701,11 +699,14 @@
                     alert("Please enter a URL");
                 }
             }
-		},
-		mounted: function(){
-			this.loadSites();
-		}
-	});
+        },
+        mounted: function(){
+            this.loadSites();
+        }
+    });
 
 
 </script>
+</html>
+
+
