@@ -1,0 +1,691 @@
+
+*{
+    box-sizing: border-box;
+}
+
+html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+	height: 100%;
+    font-family: Arial;
+}
+
+
+/********************************************************************************************************************************************************************/
+/*hidden buttons:*/
+
+#hiddenButtons {
+	list-style: none;
+	position: fixed;
+	margin: 8px;
+}
+
+#hiddenButtons li {
+	height: 16px;
+	width: 16px;
+	opacity: 0;
+    transition: opacity 1s;
+    margin-bottom: 5px;
+}
+
+#hiddenButtons li:hover {
+    opacity: 1;
+    transition: opacity 1s;
+    cursor: help;
+}
+
+#hiddenButtons img {
+	max-width: 16px;
+	max-height: 16px;
+}
+
+/*light button*/
+
+#colorTest {
+	width: 100%;
+	height: 100%;
+}
+.colorTester {
+	width: 100%;
+	height: 50%;
+}
+
+/********************************************************************************************************************************************************************/
+/*main - bg:*/
+#mainBG {
+    width: 80%;
+    min-width: 550px;
+    min-height: 100%;
+    position: fixed;
+    z-index: -98;
+    top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: rgba(255,255,235,0.4);
+    margin-left: 10%;
+}
+
+/*bgFrom*/
+#bgFrom {
+    position: fixed;
+    left: 5px;
+    bottom: 10px;
+    font-size: 0.7em;
+    text-shadow: 1px white;
+    color: darkgrey;
+}
+
+#bgFromTarget {
+    color: darkgrey;
+}
+
+#bgFromTarget:hover {
+    color: white;
+}
+
+/*version*/
+#version {
+    color: darkgrey;
+    font-size: 0.7em;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+
+/*breath*/
+#mainBG {
+	/*copied:*/
+    -webkit-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+    -moz-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+    -ms-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+    -o-box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+    box-shadow:0 0 30px rgba(250, 250, 143, 0.75);
+
+    -webkit-animation-name: breath;
+    -webkit-animation-duration: 6s;     
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes 'breath' {
+    0% {
+        -webkit-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+    	-moz-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+    	-ms-box-shadow:0 0 2px rgba(250, 250, 143, 0.75); 
+    	-o-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+    	box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+	}
+	
+    50% {
+    	-webkit-box-shadow:0 0 20px rgba(250, 250, 143, 0.75);
+    	-moz-box-shadow:0 0 20px rgba(250, 250, 143, 0.75);
+    	-ms-box-shadow:0 0 20px rgba(250, 250, 143, 0.75);
+    	-o-box-shadow:0 0 20px rgba(250, 250, 143, 0.75));
+    	box-shadow:0 0 20px rgba(250, 250, 143, 0.75);
+	}	
+    
+    100% {
+    	-webkit-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+    	-moz-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+    	-ms-box-shadow:0 0 2px rgba(250, 250, 143, 0.75); 
+    	-o-box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+    	box-shadow:0 0 2px rgba(250, 250, 143, 0.75);
+    }
+}
+
+/*main*/
+#main {
+	width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    margin: 0;          
+} 
+
+/*reserved*/
+#reserved {
+	height: 130px;
+	width: 100%;
+}
+
+/********************************************************************************************************************************************************************/
+/*search box*/
+
+/*frame*/
+#search {
+    border: 1px solid rgba(253, 255, 254, 0);
+    width: 400px;
+    height: 45px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,0.75);
+    transition: box-shadow 0.3s;
+    box-shadow: 0 0 10px rgba(215, 217, 210, 0.75);
+}
+
+#search:hover{
+    transition: box-shadow 0.3s, background-color 0.3s;
+    box-shadow: 0 0 20px rgba(245, 247, 240, 0.9);
+    background-color: rgba(255,255,255,1);
+}
+
+/*table*/
+#searcher{
+    text-align: center;
+    margin-top: 2px;
+    border-collapse: collapse;
+    height: 40px;
+    width: 100%;
+    vertical-align: middle;
+}
+
+#searcher tr {
+    height: 40px;
+    text-align: center;
+}
+
+#searcher td {
+    height: 40px;
+    vertical-align: middle;
+    text-align: center;
+    background: none;
+    /*border: 1px solid;*/
+}
+
+/*icon*/
+#searcher select {
+    height: 40px;
+    width: 110px;
+    margin: 0;
+    outline: 0;
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0);
+    cursor: pointer;
+}
+
+#searcher option {
+    max-height: 35px;
+    max-width: 100px;
+    color: black;
+    text-align: center;
+    border: none;
+}
+
+/*search bar*/
+#searcher input {
+    width: 250px;
+    outline: 0;
+    background: none;
+    border: 0;
+    border-left: 1px solid grey;
+    padding-left: 20px;
+    height: 60%;
+    font-size: 1.05em;
+}
+
+/*button*/
+#searchButton {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(50,50,50,0.5);
+}
+
+#searchButton img {
+    width: 30px;
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: opacity 0.1s;
+    opacity: 0.2;
+}
+
+#searchButton img:hover {
+    transition: opacity 0.1s;
+    opacity: 0.4;
+}
+
+
+/********************************************************************************************************************************************************************/
+/*tags*/
+
+#tags {
+    width: 78%;
+    min-width: 500px;
+    margin-top: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    overflow: hidden;
+    text-align: center;
+    align-items: center;
+    transition: 0.5s opacity;
+    opacity: 0;
+
+    display:flex;
+    display: -webkit-flex;
+
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#tags:hover {
+    transition: 0.5s opacity;
+    opacity: 1;
+}
+
+.tag {
+	border-radius: 10px;
+    width: 170px;
+    height: 130px;
+    background-color: rgb(250,250,250);
+    float: left;
+    margin-right: 1.775%;
+    margin-left: 1.775%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: opacity 0.3s, box-shadow 0.3s, background-size 0.3s;
+    opacity: 0.6;
+    white-space: nowrap;
+    text-align: center;
+    overflow: hidden;
+    /*background-size: cover;*/
+    background-size: 100%;
+    background-position: center;
+    flex-grow: 0.1;
+    box-shadow: 0 0 2px rgba(200,200,200,0.5);
+}
+
+.tag:hover {
+    transition: opacity 0.3s, box-shadow 0.3s, background-size 0.3s;
+    opacity: 0.95;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(200,200,200,1);
+    background-size: 120%;
+}
+
+.info {
+    color: rgba(80,80,80,0.7);
+    padding-top: 3px;
+    text-shadow: 0 0 1px rgba(250, 250, 250, 0.7);
+}
+.deleteTag {
+    color: rgba(180,80,80,0.7);
+    float: right;
+    padding-right: 20px;
+    width: 0;
+    height: 0;
+}
+.deleteTag:hover {
+    color: red;
+    transform: scale(1.3);
+}
+
+
+/*add*/
+#add {
+    background-image: url(../pic/add.png);
+    background-color: rgba(255,255,255,0.3);
+    border: 1px solid rgba(250, 250, 250, 0.8);
+    opacity: 0.5;
+}
+
+#add:hover {
+    opacity: 0.9;
+}
+
+/********************************************************************************************************************************************************************/
+/*login:*/
+#loginArea {
+    width: 0;
+    height: 0;
+}
+
+.loginButton {
+	position: absolute;
+	top: 20px;
+	right: 180px;
+	cursor: pointer;
+	text-align: center;
+	opacity: 0.5;
+	width: 34px;
+	overflow: hidden;
+	border-radius: 50%;
+    border: 1px solid white;
+}
+
+.loginButton:hover {
+	opacity: 0.9;
+	box-shadow: 0 0 10px white;
+}
+.buttonImg {
+	vertical-align: middle;
+	width: 32px;
+}
+
+
+
+/*commen for register and login:*/
+
+#cover {
+    z-index: 998;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0,0,0,0.65);
+    display: none;
+}
+
+.windowWrap {
+    width: 320px;
+    margin: auto;
+    z-index: 1000;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: hsla(0, 0%, 5%, .95);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.greet {
+    clear: both;
+    position: relative;
+    font-weight: lighter;
+    width: 80%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    margin-bottom: 20px; 
+}
+
+.lineWrap {
+    height: 75px;
+}
+
+.formLabels {
+    width: 100%;
+    font-size: 1.3em;
+}
+.formInputs {
+    width: 100%;
+    padding-left: 5px;
+    margin-top: 5px;
+    height: 1.7em;
+    font-size: 1em;
+}
+
+.windowLayerButtons  {
+    margin-top: 20px;
+    width: 45%;
+    height: 30px;
+    font-size: 1.1em;
+    padding: 0;
+}
+
+.toAnother {
+    margin-right: 7.5%;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: none;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    box-shadow: 0 0 5px white;
+}
+.toAnother:hover {
+    border: 1px solid white;
+    color: white;
+}
+
+.thisSubmitter {
+    margin: 0;
+    border: none;
+}
+
+.thisSubmitterDisabled {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.thisSubmitterAbled {
+    background-color: white;
+    cursor: pointer;
+}
+
+.formInfo {
+    font-size: 1em;
+    font-weight: lighter;
+    width: 100%;
+    text-align: center;
+    /*display: none;*/
+    margin-top: 10px;
+}
+.formSatisfied {
+    color: green;
+}
+.formNotSatisfied {
+    color: red;
+}
+
+.closeWindow {
+    position: relative;
+    right: 5;
+    top: 0;
+    float: right;
+    width: 30px;
+    height: 25px;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom: 1px;
+    font-size: 1.2em;
+}
+
+.closeWindow:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+/********************************************************************************************************************************************************************/
+/*login window:*/
+
+#loginWrap {
+	height: 465px;
+    display: none;
+}
+
+#loginInputs {
+    height: 250px;
+    width: 100%;
+}
+
+#loginForm {
+	width: 80%;
+    height: 200px;
+	margin: 10px auto;
+	left: 0;
+	right: 0;
+}
+
+#forget {
+	font-size: 0.8em;
+	text-decoration: underline;
+	cursor: pointer;
+	position: relative;
+	bottom: -110px;
+	left: 185px;
+}
+#forget:hover {
+	color: white;
+	text-shadow: 0 0 2px white;
+}
+
+#loginCaptcha {
+    width: 60%;
+}
+
+#captchaPic {
+    width: 30%;
+    position: relative;
+    top: 8px;
+    left: 10px;
+    height: 1.7em;
+    size: cover;
+    cursor: pointer;
+}
+
+/********************************************************************************************************************************************************************/
+/*forget password window:*/
+
+#forgetWrap {
+    height: 590px;
+    display: none;
+}
+
+#forgetInputs {
+    height: 395px;
+    width: 100%;
+}
+
+#forgetForm {
+    width: 80%;
+    height: 4px;
+    margin: 10px auto;
+    left: 0;
+    right: 0;
+}
+
+#forgetCaptcha {
+    width: 55%;
+}
+
+#getForgetCaptcha {
+    height: 1.9em;
+    width: 40%;
+    border-radius: 3px;
+    margin-left: 6px;
+    cursor: pointer;
+    outline: none;
+}
+
+
+/********************************************************************************************************************************************************************/
+/*register window:*/
+
+#registerWrap {
+    height: 600px;
+    display: none;
+}
+
+#registerInputs {
+    height: 395px;
+    width: 100%;
+}
+
+#registerForm {
+    width: 80%;
+    height: 200px;
+    margin: 10px auto;
+    left: 0;
+    right: 0;
+}
+
+
+#registerCaptcha {
+    width: 55%;
+}
+
+#getRegisterCaptcha {
+    height: 1.9em;
+    width: 40%;
+    border-radius: 3px;
+    margin-left: 6px;
+    cursor: pointer;
+    outline: none;
+}
+
+
+/********************************************************************************************************************************************************************/
+/*after login:*/
+
+#afterLoginWrap {
+    width: 170px;
+    background-color: rgba(50, 50, 50, 0.8);
+    height: 83px;
+    position: absolute;
+    top: 20px;
+    right: 230px;
+    z-index: 100;
+    border-radius: 5px;
+    display: none;
+    /*visibility: hidden;*/
+}
+#afterLoginWrap:after{
+    border: solid transparent;
+    content: '';
+    height: 0;
+    left: 100%;    
+    position: absolute;
+    width: 0;
+    border-width: 8px;
+    border-left-color: rgba(50, 50, 50, 0.8);
+    top: 10px; 
+} 
+
+#showedUsername {
+    /*margin-left: 10px;*/
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow: hidden;
+    margin-top: 6px;
+    margin-bottom: 5px;
+    font-size: 1.5em;
+    width: 100%;
+    text-align: left;
+    color: rgb(200, 200, 200);
+}
+
+#logoutButton {
+    vertical-align: middle;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 7px;
+    color: white;
+}
+#logoutButton:hover {
+    text-shadow: 0 0 5px white;
+}
+
+#logoutImg {
+    height: 1.3em;
+    margin: 0;
+    display: inline;
+}
+
+#logoutText {
+    position: relative;
+    bottom: 2px;
+    margin-left: 4px;
+    font-size: 1.2em;
+    font-weight: lighter;
+}
+
+
+
+hr {
+    width: 95%;
+    margin: 0;
+    margin-left: 2.5%;
+    border: none;
+    border-top: 1px solid white;
+}

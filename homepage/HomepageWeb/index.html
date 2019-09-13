@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<link rel="shortcut icon" href="favicon.ico">
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <link type="text/css" href="css/style.css" rel="styleSheet"></link>
+
+	<title>Home</title>
+</head>
+<body>
+	<div id="bg" :style="styleObject()"></div>
+	<!-- ======================================================================================= -->
+
+    <!-- <div id="windowLayer"> -->
+    	<div id="loginWrap" class="windowWrap" @keyup.esc="closeLoginWrap()">
+    		<p class="closeWindow" @click="closeLoginWrap()">x</p>
+    		<h1 class="greet">Welcome <br> ; )</h1>
+    		<form id="loginForm" @keyup.enter="login">
+                <div id="loginInputs">
+                    <div class="lineWrap">
+            			<label class="formLabels" for="loginUsername" id="loginUsernameLabel">Username :</label>
+            			<input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkLoginUsername(), checkLoginSatisfied()" type="text" name="loginUsername" id="loginUsername" maxlength="50" placeholder="Username"/>
+        			</div>
+                    <div class="lineWrap">
+                        <label class="formLabels" for="loginPassword" id="loginPasswordLabel">Password :</label>
+        		      	<input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkLoginPassword(), checkLoginSatisfied()" type="password" name="loginPassword" id="loginPassword" maxlength="20" placeholder="Password"/>
+        			</div>
+                    <div class="lineWrap">
+                        <label class="formLabels" for="loginCaptcha" id="loginCaptchaLabel">Captcha :<br></label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkLoginCaptcha(), checkLoginSatisfied()" type="text" name="loginCaptcha" id="loginCaptcha" maxlength="5" placeholder="Captcha"></input>
+                        <img id="captchaPic" src="" alt="captcha" title="Click to change" @click="changeImageCaptcha()"></img>
+                    </div>
+                    <p :class="satisfied()?'formInfo formSatisfied':'formInfo formNotSatisfied'" id="loginInfo">{{info}}</p>
+                </div>
+                <input class="windowLayerButtons toAnother" type="button" @click="toRegister()" value="To register"></input>
+    			<input class="windowLayerButtons thisSubmitter" type="button" @click="login" @mouseover="checkLoginSatisfied()" @mouseout="checkLoginSatisfied()" value="Login" id="loginSubmitter"></input>
+    		</form>
+    		<p id="forget" @click="toForgetPassword">Forget password?</p>
+    	</div>
+
+
+        <div id="forgetWrap" class="windowWrap" @keyup.esc="closeForgetWrap()">
+            <p class="closeWindow" @click="closeForgetWrap()">x</p>
+            <h1 class="greet">Reset password <br> X D</h1>
+            <form id="forgetForm" @keyup.enter="change">
+                <div id="forgetInputs">
+                    <div class="lineWrap">
+                        <label class="formLabels" for="forgerUsername" id="forgetUsernameLabel">Username :</label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkForgetUsername(), checkForgetSatisfied()" type="text" name="forgetUsername" id="forgetUsername" maxlength="50" placeholder="No more than 50"></input>
+                    </div>
+                    <div class="lineWrap">
+                        <label class="formLabels" for="forgetEmail" id="forgetEmailLabel">Email :</label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkForgetEmail(), checkForgetSatisfied()" type="text" name="forgetEmail" id="forgetEmail" placeholder="The same as when sign up"></input>
+                    </div>
+                    <div class="lineWrap">
+                            <label class="formLabels" for="newPassword" id="newPasswordLabel">New password :</label>
+                            <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkForgetPassword(), checkForgetSatisfied()" type="password" name="forgetPassword" id="forgetPassword" maxlength="20" placeholder="6 - 20 numbers AND letters"></input>
+                        </div>
+                    <div class="lineWrap">
+                        <label class="formLabels" for="forgetRepeat" id="forgetRepeatLabel">Repeat password :</label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkForgetRepeat(), checkForgetSatisfied()" type="password" name="forgetRepeat" id="forgetRepeat" maxlength="20" placeholder="Enter password again"></input>
+                    </div>
+                    <div class="lineWrap">
+                        <label class="formLabels" for="forgetCaptcha" id="forgetCaptchaLabel">Captcha :<br></label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkForgetCaptcha(), checkForgetSatisfied()" type="text" name="forgetCaptcha" id="forgetCaptcha" maxlength="5" placeholder="Check your Email"></input>
+                        <button type="button" name="getForgetCaptcha" id="getForgetCaptcha" @click="getForgetCaptcha()">{{buttonText}}</button>
+                    </div>
+                    <p :class="satisfied()?'formInfo formSatisfied':'formInfo formNotSatisfied'" id="forgetInfo">{{info}}</p>
+
+                </div>
+                <input class="windowLayerButtons toAnother" type="button" @click="toLogin" value="To login"></input>
+                <input class="windowLayerButtons thisSubmitter" type="button" @click="changePassword" @mouseover="checkForgetSatisfied()" @mouseout="checkForgetSatisfied()" value="Submit" id="forgetSubmitter"></input>
+            </form>
+        </div>
+    
+
+        <div id="registerWrap" class="windowWrap" @keyup.esc="closeRegisterWrap()">
+            <p class="closeWindow" @click="closeRegisterWrap()">x</p>
+            <h1 class="greet">Start your trip <br> : )</h1>
+            <form id="registerForm" @keyup.enter="register">
+                <div id="registerInputs">
+                    <div class="lineWrap">
+                        <label class="formLabels" for="registerUsername" id="registerUsernameLabel">Username :</label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkRegisterUsername(), checkRegisterSatisfied()" type="text" name="registerUsername" id="registerUsername" maxlength="50" placeholder="No more than 50"></input>
+                    </div>
+                    <div class="lineWrap">
+                        <label class="formLabels" for="registerPassword" id="registerPasswordLabel">Password :</label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkRegisterPassword(), checkRegisterSatisfied()" type="password" name="registerPassword" id="registerPassword" maxlength="20" placeholder="6 - 20 numbers AND letters20"></input>
+                    </div>
+                    <div class="lineWrap">
+                        <label class="formLabels" for="registerRepeat" id="repeatPasswordLabel">Repeat password :</label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkRegisterRepeat(), checkRegisterSatisfied()" type="password" name="registerRepeat" id="registerRepeat" maxlength="20" placeholder="Enter password again"></input>
+                    </div>
+                    <div class="lineWrap">
+                        <label class="formLabels" for="registerEmail" id="registerEmailLabel">Email :</label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkRegisterEmail(), checkRegisterSatisfied()" type="text" name="registerEmail" id="registerEmail" placeholder="Your own Email"></input>
+                    </div>
+                    <div class="lineWrap">
+                        <label class="formLabels" for="registerCaptcha" id="registerCaptchaLabel">Captcha :<br></label>
+                        <input class="formInputs" @focus="focusEffect($event)" @blur="blurEffect($event), checkRegisterCaptcha(), checkRegisterSatisfied()" type="text" name="registerCaptcha" id="registerCaptcha" maxlength="5" placeholder="Check your Email"></input>
+                        <button type="button" name="getRegisterCaptcha" id="getRegisterCaptcha" @click="getRegisterCaptcha()">{{buttonText}}</button>
+                    </div>
+                    <p :class="satisfied()?'formInfo formSatisfied':'formInfo formNotSatisfied'" id="registerInfo">{{info}}</p>
+                </div>
+                <input class="windowLayerButtons toAnother" type="button" @click="toLogin" value="To login"></input>
+                <input class="windowLayerButtons thisSubmitter" type="button" @click="register" value="Register" id="registerSubmitter" @mouseover="checkRegisterSatisfied()" @mouseout="checkRegisterSatisfied()"></input>
+            </form>
+        </div>
+    <!-- </div> -->
+
+	<!-- ======================================================================================= -->
+	
+    <div id="main">
+    	<div id="cover"></div>
+    	<div id="loginArea">
+    		<div id="login" class="loginButton" title="Login" @click="showLoginWrap">
+	    		<img src="pic/login.png" alt="login" id="buttonImg" class="buttonImg"></img>
+	    	</div>
+	    	<div id="user" class="loginButton" title="User info" @click="toggleAfterLoginWrap">
+                <img src="pic/user.png" alt="User" id="userImg" class="buttonImg"></img>
+            </div>
+    		<div id="afterLoginWrap">
+	    		<p id="showedUsername"></p>
+	    		<hr>
+	    		<div id="logoutButton" @click="logout">
+	    			<img src="pic/logout.png" id="logoutImg">
+	    			<span id="logoutText">Log out</span>		
+	    		</div>
+	    	</div>
+    	</div>
+    	
+    	
+
+    	<ul id="hiddenButtons">
+			<li @click="changeImg()" id="refreshImg">
+	        	<img src="pic/refresh.png" alt="refreshBackground">
+			</li>
+			<li @click="fixTags()">
+				<img id="fix" src="pic/fix.png" alt="fixTags">
+			</li>
+		</ul>
+
+    	<div id="mainBG"></div>
+
+        <p id="bgFrom">
+            Background image from: <br>
+            <a id="bgFromTarget" href="https://wallpapercave.com/" target="_blank">https://wallpapercave.com</a>
+        </p>
+        <p id="version">v 2.0</p>
+    	<div id="reserved"></div>
+
+    	<div id="search"> 
+            <table id="searcher">
+                <tr>
+                    <td style="vertical-align:bottom; text-align:center;">
+                        <select id="switcher" name="switch" @change="changeEngine()" v-model="picked" title="Change search engine">
+                            <option v-for="engine in searchEngines" :value="engine.name" :id="engine.name">{{engine.name}}</option>
+                        </select>
+                    </td>
+                    <td id="searchBox">
+                        <input type="text" id="searchPlace" autofocus="autofocus" :placeholder="randomHolder()" @keypress="if(event.keyCode==13) search()" v-model="text" @focus="focus()" @blur="blur()">
+                    </td>
+                    <td id="searchButton" title="Search!">
+                        <img src="pic/search.png" tabindex="0" alt="search" @click="search()" >
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="tags">
+        	<div class="tag" v-for="site in userSites" @click="openTag(site.url)" :style="{backgroundImage: 'url(' + encodeURI(site.imgPath) + ')'}">
+                <span class="info">{{site.name}}</span>
+                <span class="deleteTag" title="Remove this tag" @click="deleteTag($event)">x</span>
+            </div>
+            <div class="tag" id="add" @click="addNewTag($event)">
+                <span class="info">
+                    add new tag
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+<script type="text/javascript" src="js/main.js"></script>
+
+</html>

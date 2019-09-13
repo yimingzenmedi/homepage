@@ -1,0 +1,6 @@
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb.Models\bin\Debug\HomepageWeb.Models.dll
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb.Models\bin\Debug\HomepageWeb.Models.pdb
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb.Models\obj\Debug\HomepageWeb.Models.csprojAssemblyReference.cache
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb.Models\obj\Debug\HomepageWeb.Models.csproj.CoreCompileInputs.cache
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb.Models\obj\Debug\HomepageWeb.Models.dll
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb.Models\obj\Debug\HomepageWeb.Models.pdb

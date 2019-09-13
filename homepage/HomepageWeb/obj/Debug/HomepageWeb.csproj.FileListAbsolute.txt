@@ -1,0 +1,16 @@
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\HomepageWeb.dll.config
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\HomepageWeb.dll
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\HomepageWeb.pdb
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\HomepageWeb.BLL.dll
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\HomepageWeb.Models.dll
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\HomepageWeb.DAL.dll
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\Newtonsoft.Json.dll
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\HomepageWeb.BLL.pdb
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\HomepageWeb.Models.pdb
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\HomepageWeb.DAL.pdb
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\bin\Newtonsoft.Json.xml
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\obj\Debug\HomepageWeb.csprojAssemblyReference.cache
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\obj\Debug\HomepageWeb.csproj.CoreCompileInputs.cache
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\obj\Debug\HomepageWeb.csproj.CopyComplete
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\obj\Debug\HomepageWeb.dll
+E:\Project\VisualStudio\Homepage\HomepageWeb\HomepageWeb\obj\Debug\HomepageWeb.pdb
