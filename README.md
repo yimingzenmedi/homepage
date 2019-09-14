@@ -2,11 +2,14 @@
 *v2.0.0*<br><br>
 Homemade homepage : )
 
-Navigation website mainly implemented by Vue.js and .NET. This is the version 2.0.0 with a server program. Users can login and synchronize their added sites. 
+Navigation website mainly implemented by Vue.js and .NET. This is the version 2.0.0 with a server program. Users can login and synchronize their added sites. Try me **[HERE](https://homepageweb20190914024555.azurewebsites.net/)**!
 <br>All the background pictures are from [wallpapercave](https://wallpapercave.com/).
 
 ----------------------------------------
 
+## What's new
+
+Added a server program written in C# .NET. Users can create accounts to synchronize their saved sites at anywhere.
 ## Functions
 
 ### 1. Search
@@ -21,7 +24,13 @@ Shortcuts are *hidden* and *displayed when the mouse is over it*. There are 11 p
 The information of shortcuts will also be storaged in **Local Storage** so the next time you enter this website the shortcuts will be loaded.
 
 
-### 3. Others
+### 3. Register, login and reset password (NEW!)
+Users can *register their own account to synchronize their sites saved*. By clicking the **login button** on the right top of the main area, you can login, register or reset the password (forget password). The sites users added will be saved in the database, and when login at somewhere else, the sites can be synchronized. 
+
+To create an account, **username**, **password** and **email address** are need. Email address will be used to *receive captcha* and *reset password*. The server will not save the emails directly but will save its hash value. 
+
+
+### 4. Others
 + The background images will be randomly changed every time you open this page or refresh it. 
 + The color of the breathing lights on both sides of the main area is randomly generated.
 + The placeholder content of the search box is randomly selected from the presets.
@@ -30,12 +39,14 @@ The information of shortcuts will also be storaged in **Local Storage** so the n
 ------------------------------------------
 
 ## What's next
-
-For the next step I want to write a backend and a login program to allow users to synchronize settings and stored shortcuts via logging in.
++ Cache images to increase access speed.
++ Close the wrap of user info by clicking anywhere else out of the wrap.
++ Some small bugs appearing sometimes on the frount end.
 
 More features are being imagined...
 
 -------------------------------------------
+Try me at: https://homepageweb20190914024555.azurewebsites.net/
 
 ***Enjoy your journey with it!***
 
