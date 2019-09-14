@@ -40,6 +40,7 @@ To create an account, **username**, **password** and **email address** are need.
 
 ## What's next
 + Cache images to increase access speed.
++ Balance the images' quality and size to increase access speed.
 + Close the wrap of user info by clicking anywhere else out of the wrap.
 + Some small bugs appearing sometimes on the frount end.
 
