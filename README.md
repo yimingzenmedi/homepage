@@ -41,6 +41,10 @@ To create an account, **username**, **password** and **email address** are need.
 ## How to release and try
 This is writen in ASP.NET 4.0. Download the package and open it with visual studio. Then you can release it using visual studio.
 
+*Before you use it, there are some works to do*. 
+
+1. **Configure the database string**. It is defined in ***Web.config*** in folder homepageWeb. 
+
 ------------------------------------------
 
 ## What's next
@@ -48,6 +52,7 @@ This is writen in ASP.NET 4.0. Download the package and open it with visual stud
 + Balance the images' quality and size to increase access speed.
 + Close the wrap of user info by clicking anywhere else out of the wrap.
 + Some small bugs appearing sometimes on the frount end.
++ Automatically create database tables when start the website for the first time.
 
 More features are being imagined...
 
