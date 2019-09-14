@@ -43,7 +43,8 @@ This is writen in ASP.NET 4.0. Download the package and open it with visual stud
 
 *Before you use it, there are some works to do*. 
 
-1. **Configure the database string**. It is defined in ***Web.config*** in folder homepageWeb. 
+1. **Configure the database connection string**. It is defined in ***Web.config*** in folder homepageWeb. Add your connection string in node **connectionStrings**. 
+2. **Set up database table**. I haven't achieve creating database tables automatically so you need to *create them on your own*. There are two tables: **Userinfo** and **UserSites**. Information about database tables are shown below:
 
 ------------------------------------------
 
