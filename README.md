@@ -43,9 +43,12 @@ This is writen in ASP.NET 4.0. Download the package and open it with visual stud
 
 *Before you use it, there are some works to do*. 
 
-1. **Configure the database connection string**. It is defined in ***Web.config*** in folder homepageWeb. Add your connection string in node **connectionStrings**. 
+1. **Configure the database connection string**. It is defined in ***Web.config*** in folder **homepageWeb**. Add your connection string in node **connectionStrings**. 
 2. **Set up database table**. I haven't achieve creating database tables automatically so you need to *create them on your own*. There are two tables: **Userinfo** and **UserSites**. Information about database tables are shown below:
-
+![image](https://raw.githubusercontent.com/yimingzenmedi/homepage/master/database%20information.png)
+I will improve this problem as soon as possible.
+3. **Configure the email server settings**. An email SMTP service is needed to send captcha to users when they register new accounts or reset their password. Settings about this email service is defined in ***Web.config*** in folder **homepageWeb**. In node **EmailSettings/email** you need to set your email **username**, **password**, **host** and **prot** who provide the SMTP service. The preset host and port is for *Gmail*. If you need other emails, you need to replace them by your owns.
+4. **Finally, release ad use.**
 ------------------------------------------
 
 ## What's next
