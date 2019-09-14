@@ -38,6 +38,11 @@ To create an account, **username**, **password** and **email address** are need.
 
 ------------------------------------------
 
+## How to release and try
+This is writen in ASP.NET 4.0. Download the package and open it with visual studio. Then you can release it using visual studio.
+
+------------------------------------------
+
 ## What's next
 + Cache images to increase access speed.
 + Balance the images' quality and size to increase access speed.
