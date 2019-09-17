@@ -34,7 +34,7 @@ To create an account, **username**, **password** and **email address** are need.
 + The background images will be randomly changed every time you open this page or refresh it. 
 + The color of the breathing lights on both sides of the main area is randomly generated.
 + The placeholder content of the search box is randomly selected from the presets.
-+ There are 2 hidden buttons (not really hard to find :P ).
++ There are 3 hidden buttons (not really hard to find :P ).
 
 ------------------------------------------
 
