@@ -1,5 +1,5 @@
 # homepage 
-*v2.0.0*<br><br>
+*v2.0.1*<br><br>
 Homemade homepage : )
 
 Navigation website mainly implemented by Vue.js and .NET. This is the version 2.0.0 with a server program. Users can login and synchronize their added sites. Try me **[HERE](https://homepageweb20190914024555.azurewebsites.net/)**!
@@ -9,7 +9,10 @@ Navigation website mainly implemented by Vue.js and .NET. This is the version 2.
 
 ## What's new
 
-Added a server program written in C# .NET. Users can create accounts to synchronize their saved sites at anywhere.
++ Optimized the interactive experience of front-end pages.
++ The database table can be automatically created when the website is started, eliminating the need to manually create database tables.
++ Adjusted the pixels of some images to improve the loading speed.
+
 ## Functions
 
 ### 1. Search
@@ -24,7 +27,7 @@ Shortcuts are *hidden* and *displayed when the mouse is over it*. There are 11 p
 The information of shortcuts will also be storaged in **Local Storage** so the next time you enter this website the shortcuts will be loaded.
 
 
-### 3. Register, login and reset password (NEW!)
+### 3. Register, login and reset password
 Users can *register their own account to synchronize their sites saved*. By clicking the **login button** on the right top of the main area, you can login, register or reset the password (forget password). The sites users added will be saved in the database, and when login at somewhere else, the sites can be synchronized. 
 
 To create an account, **username**, **password** and **email address** are need. Email address will be used to *receive captcha* and *reset password*. The server will not save the emails directly but will save its hash value. 
@@ -44,18 +47,12 @@ This is writen in ASP.NET 4.0. Download the package and open it with visual stud
 *Before you use it, there are some works to do*. 
 
 1. **Configure the database connection string**. It is defined in ***Web.config*** in folder **homepageWeb**. Add your connection string in node **connectionStrings**. 
-2. **Set up database table**. I haven't achieve creating database tables automatically so you need to *create them on your own*. There are two tables: **Userinfo** and **UserSites**. Information about database tables are shown below:
-![image](https://raw.githubusercontent.com/yimingzenmedi/homepage/master/database%20information.png)
-I will improve this problem as soon as possible.
-3. **Configure the email server settings**. An email SMTP service is needed to send captcha to users when they register new accounts or reset their password. Settings about this email service is defined in ***Web.config*** in folder **homepageWeb**. In node **EmailSettings/email** you need to set your email **username**, **password**, **host** and **prot** who provide the SMTP service. The preset host and port is for *Gmail*. If you need other emails, you need to replace them by your owns.
-4. **Finally, release ad use.**
+2. **Configure the email server settings**. An email SMTP service is needed to send captcha to users when they register new accounts or reset their password. Settings about this email service is defined in ***Web.config*** in folder **homepageWeb**. In node **EmailSettings/email** you need to set your email **username**, **password**, **host** and **prot** who provide the SMTP service. The preset host and port is for *Gmail*. If you need other emails, you need to replace them with your owns.
+3. **Finally, release ad use.**
 ------------------------------------------
 
 ## What's next
-+ Balance the images' quality and size to increase access speed.
-+ Close the wrap of user info by clicking anywhere else out of the wrap.
-+ Some small bugs appearing sometimes on the frount end.
-+ Automatically create database tables when start the website for the first time.
++ Allows the user to customize the background image of the label.
 
 More features are being imagined...
 
