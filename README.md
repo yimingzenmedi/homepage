@@ -42,7 +42,7 @@ To create an account, **username**, **password** and **email address** are need.
 ------------------------------------------
 
 ## How to release and try
-This is writen in ASP.NET 4.0. Download the package and open it with visual studio. Then you can release it using visual studio.
+This is writen in ASP.NET 4.0. Download the package and open it with **visual studio**. Then you can *release it using visual studio*.
 
 *Before you use it, there are some works to do*. 
 
