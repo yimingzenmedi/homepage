@@ -50,6 +50,7 @@
     <Compile Include="CaptchaTextProvider.cs" />
     <Compile Include="EmailSender.cs" />
     <Compile Include="HashManager.cs" />
+    <Compile Include="DBTablesInitializer.cs" />
     <Compile Include="LoginStateManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaltManager.cs" />

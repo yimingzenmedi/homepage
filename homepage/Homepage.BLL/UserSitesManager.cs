@@ -163,6 +163,24 @@ namespace HomepageWeb.BLL
         }
 
 
+        /// <summary>
+        /// save the custom background image of tags
+        /// all the params are checked.
+        /// </summary>
+        /// <param name="iconBase64">base64 of the image</param>
+        /// <param name="siteName">site name of the image</param>
+        /// <param name="userName">site name of the user</param>
+        /// <returns>
+        /// 0: nothing changed
+        /// 1: successfully uploaded
+        /// </returns>
+        public int SetCustomBGImage(string iconBase64, string siteName, string userName)
+        {
+            UserSiteService userSiteService = new UserSiteService();
+            return new UserSiteService().UploadCustomBGImage(iconBase64, siteName, userName);
+        }
+
+
 
 
 
