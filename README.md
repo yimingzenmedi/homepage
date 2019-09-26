@@ -1,5 +1,5 @@
 # homepage 
-*v2.0.1*<br><br>
+*v2.1.0*<br><br>
 Homemade homepage : )
 
 Navigation website mainly implemented by Vue.js and .NET. This is the version 2.0.0 with a server program. Users can login and synchronize their added sites. Try me **[HERE](https://homepageweb20190914024555.azurewebsites.net/)**!
@@ -9,9 +9,8 @@ Navigation website mainly implemented by Vue.js and .NET. This is the version 2.
 
 ## What's new
 
-+ Optimized the interactive experience of front-end pages.
-+ The database table can be automatically created when the website is started, eliminating the need to manually create database tables.
-+ Adjusted the pixels of some images to improve the loading speed.
++ Users can customize the background images of tags
++ The user interface was fine-tuned.
 
 ## Functions
 
@@ -33,7 +32,12 @@ Users can *register their own account to synchronize their sites saved*. By clic
 To create an account, **username**, **password** and **email address** are need. Email address will be used to *receive captcha* and *reset password*. The server will not save the emails directly but will save its hash value. 
 
 
-### 4. Others
+### 4. Customize background images of tags
+Users can *customize their background images of tags*. The uploaded images should be **under 25kb**, and the recommanded size should be around **210px * 130px**, which can have a better effect. 
+
+All the uploaded images will be converted to Base64. If the user *does not login*, the images will be stored in **localstorage**. Or, the images will be *uploaded to server and stored in database*.
+
+### 5. Others
 + The background images will be randomly changed every time you open this page or refresh it. 
 + The color of the breathing lights on both sides of the main area is randomly generated.
 + The placeholder content of the search box is randomly selected from the presets.
@@ -42,17 +46,17 @@ To create an account, **username**, **password** and **email address** are need.
 ------------------------------------------
 
 ## How to release and try
-This is writen in ASP.NET 4.0. Download the package and open it with **visual studio**. Then you can *release it using visual studio*.
 
 *Before you use it, there are some works to do*. 
 
 1. **Configure the database connection string**. It is defined in ***Web.config*** in folder **homepageWeb**. Add your connection string in node **connectionStrings**. 
 2. **Configure the email server settings**. An email SMTP service is needed to send captcha to users when they register new accounts or reset their password. Settings about this email service is defined in ***Web.config*** in folder **homepageWeb**. In node **EmailSettings/email** you need to set your email **username**, **password**, **host** and **prot** who provide the SMTP service. The preset host and port is for *Gmail*. If you need other emails, you need to replace them with your owns.
-3. **Finally, release ad use.**
+3. **Finally, release it to your server and use.**
 ------------------------------------------
 
 ## What's next
-+ Allows the user to customize the background image of the label.
++ Support for automatic login.
++ Optimize the user experience of the user interface.
 
 More features are being imagined...
 
