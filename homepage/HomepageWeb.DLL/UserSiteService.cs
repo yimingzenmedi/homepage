@@ -48,10 +48,20 @@ namespace HomepageWeb.DAL
             List<UserSite> list = new List<UserSite>();
             foreach (DataRow row in dt.Rows)
             {
-                UserSite userSite = new UserSite();
-                userSite.username = (string)row["Username"];
-                userSite.siteName = (string)row["Sitename"];
-                userSite.siteUrl = (string)row["Siteurl"];
+                UserSite userSite = new UserSite
+                {
+                    username = (string)row["Username"],
+                    siteName = (string)row["Sitename"],
+                    siteUrl = (string)row["Siteurl"],
+                };
+                if (row["Icon"] == null)
+                {
+                    userSite.icon = null;
+                }
+                else
+                {
+                    userSite.icon = Convert.ToString(row["Icon"]);
+                }
                 list.Add(userSite);
             }
             return list;
@@ -84,6 +94,14 @@ namespace HomepageWeb.DAL
                     siteName = Convert.ToString(dr["Sitename"]),
                     siteUrl = Convert.ToString(dr["Siteurl"])
                 };
+                if (dr["Icon"] == null)
+                {
+                    userSite.icon = null;
+                }
+                else
+                {
+                    userSite.icon = Convert.ToString(dr["Icon"]);
+                }
             }
             return userSite;
         }
@@ -101,6 +119,19 @@ namespace HomepageWeb.DAL
                 new SqlParameter("@username", userSite.username),
                 new SqlParameter("@sitename", userSite.siteName),
                 new SqlParameter("@siteurl", userSite.siteUrl),
+            };
+            return DBHelper.ExecuteNonQuery(sqlQuery, param);
+        }
+
+
+        public int UploadCustomBGImage(string iconBase64, string siteName, string userName)
+        {
+            string sqlQuery = "UPDATE [dbo].[UserSites] SET [Icon]=@icon WHERE [Username]=@username AND [Sitename]=@sitename";
+            SqlParameter[] param =
+            {
+                new SqlParameter("@icon", iconBase64),
+                new SqlParameter("@username", userName),
+                new SqlParameter("@sitename", siteName),
             };
             return DBHelper.ExecuteNonQuery(sqlQuery, param);
         }
