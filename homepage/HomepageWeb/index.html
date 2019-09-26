@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="keywords" content="homepage,主页,首页,导航,navigation,">
+    <meta name="author" content="Sam">
+    <meta name="version" content="2.1.0">
 	<link rel="shortcut icon" href="favicon.ico">
     <script type="text/javascript" src="js/vue.min.js"></script>
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -135,10 +138,13 @@
 
     	<ul id="hiddenButtons">
 			<li @click="changeImg()" id="refreshImg">
-	        	<img src="pic/refresh.png" alt="refreshBackground">
+	        	<img src="pic/refresh.png" alt="refreshBackground"/>
 			</li>
 			<li @click="fixTags()">
-				<img id="fix" src="pic/fix.png" alt="fixTags">
+				<img id="fix" src="pic/fix.png" alt="fixTags"/>
+			</li>
+			<li>
+				<a href="https://github.com/yimingzenmedi/homepage" target="_blank"><img id="aboutMe" src="pic/info.png"/></a>
 			</li>
 		</ul>
 
@@ -146,9 +152,9 @@
 
         <p id="bgFrom">
             Background image from: <br>
-            <a id="bgFromTarget" href="https://wallpapercave.com/" target="_blank">https://wallpapercave.com</a>
+            <a class="webInfoA" href="https://wallpapercave.com/" target="_blank">https://wallpapercave.com</a>
         </p>
-        <p id="version">v 2.0</p>
+        <a class="webInfoA" id="version" target="_blank" href="https://github.com/yimingzenmedi/homepage">v 2.0</a>
     	<div id="reserved"></div>
 
     	<div id="search"> 
@@ -169,9 +175,25 @@
             </table>
         </div>
         <div id="tags">
-        	<div class="tag" v-for="site in userSites" @click="openTag(site.url)" :style="{backgroundImage: 'url(' + encodeURI(site.imgPath) + ')'}">
+        	<div class="tag" v-for="(site,index) in userSites" @click.self="openTag(site.url)" :style="{backgroundImage: 'url(' + encodeURI(site.imgPath) + ')'}" :id="index+'Tag'">
                 <span class="info">{{site.name}}</span>
-                <span class="deleteTag" title="Remove this tag" @click="deleteTag($event)">x</span>
+                <!-- <span class="deleteTag" title="Remove this tag" @click="deleteTag($event)">x</span> -->
+                <div class="operations">
+                	<div class="operationButtonImg" @click="toggleOperationsWrap($event)"></div>
+                	<div class="operationsWrap">
+	                	<div class="operation deleteTag" @click="deleteTag($event)">
+	                		<img src="./pic/del.png">
+	                		<span>delete</span>
+	                	</div>
+	                	<hr>
+	                	<div class="operation uploadBG">
+	                		<img src="./pic/bg.png"  @click.stop="customBg($event)">
+	                		<span  @click.stop="customBg($event)">custom bg</span>
+	                		<input type="file" class="uploader" accept=".jpeg,.jpg,.png,.bmp" style="display:none" @change="uploaderOnchange($event)">
+	                	</div>
+	                </div>
+                </div>
+                
             </div>
             <div class="tag" id="add" @click="addNewTag($event)">
                 <span class="info">
