@@ -9,5 +9,6 @@
         public string siteName {get;set;}
         public string siteUrl { get; set; }
         public string username { get; set; }
+        public string icon { get; set; }
     }
 }
